@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "meta-images": "node scripts/generate-icons.mjs && node scripts/generate-story-og.mjs",
     "astro": "astro"
   },
   "dependencies": {

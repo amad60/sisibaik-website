@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import Photo from '../../components/Photo.astro';
 import StoryCard from '../../components/StoryCard.astro';
 import { stories, coverOf, formatDate, slugify, type Story } from '../../lib/stories';
 import { storyImage, storySrcset } from '../../lib/images';
@@ -30,6 +31,24 @@ const body = story.body
     return `<img${attrs} src="${src}"${srcset ? ` srcset="${srcset}" sizes="(min-width: 900px) 760px, 92vw"` : ''} width="${img.width}" height="${img.height}" loading="lazy" decoding="async">`;
   });
 
+const galleries: Record<string, { name: string; alt: string; cap: string }[]> = {
+  'lulus-ibm-2025-2026': [
+    { name: 'pelepasan-2026-anak', alt: 'Siswa menerima ijazah Indonesia Bisa Membaca', cap: 'Penerima ijazah' },
+    { name: 'pelepasan-2026-orang-tua', alt: 'Siswa penerima ijazah bersama orang tua', cap: 'Bersama orang tua' },
+    { name: 'pelepasan-2026-tawa', alt: 'Siswa tertawa bersama saat acara pelepasan', cap: 'Keseruan pelepasan' },
+    { name: 'pelepasan-2026-panggung', alt: 'Suasana acara pelepasan di kelas', cap: 'Pelepasan IBM 2025-2026' },
+  ],
+};
+const gallery = galleries[story.slug];
+
+const plain = (html: string) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const firstPara = plain(body.match(/<p>([\s\S]*?)<\/p>/)?.[1] ?? '');
+const words = (t: string) => new Set(t.toLowerCase().match(/[a-z0-9]+/g) ?? []);
+const excerptWords = words(story.excerpt);
+const paraWords = words(firstPara);
+const overlap = [...excerptWords].filter((w) => paraWords.has(w)).length / Math.max(1, excerptWords.size);
+const showLede = overlap < 0.7;
+
 const related = [
   ...stories.filter((s) => s.slug !== story.slug && s.category === story.category),
   ...stories.filter((s) => s.slug !== story.slug && s.category !== story.category),
@@ -57,7 +76,7 @@ const jsonLd = {
         <time datetime={story.date}>{formatDate(story.date)}</time>
       </div>
       <h1 class="h1" data-reveal style="--d:.08s">{story.title}</h1>
-      <p class="lede" data-reveal style="--d:.14s">{story.excerpt}</p>
+      {showLede && <p class="lede" data-reveal style="--d:.14s">{story.excerpt}</p>}
     </header>
 
     {cover && (
@@ -67,7 +86,21 @@ const jsonLd = {
     )}
 
     <div class="wrap body-wrap">
-      <div class="prose" set:html={body} />
+      <div>
+        <div class="prose" set:html={body} />
+        {gallery && (
+          <ul class="gallery" aria-label="Foto pelepasan">
+            {gallery.map((g) => (
+              <li>
+                <figure>
+                  <div class="frame"><Photo name={g.name} alt={g.alt} sizes="(min-width: 900px) 380px, 46vw" widths={[420, 760, 1000]} /></div>
+                  <figcaption>{g.cap}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <aside class="aside">
         <div class="aside-card">
           <p class="k">Ikut bergerak</p>
@@ -225,6 +258,32 @@ const jsonLd = {
   .prose :global(strong),
   .prose :global(b) {
     color: var(--ink);
+  }
+  .gallery {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .gallery figure {
+    margin: 0;
+  }
+  .gallery .frame {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+  }
+  .gallery :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .gallery figcaption {
+    margin-top: 0.5rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--muted);
   }
   .aside-card {
     position: sticky;

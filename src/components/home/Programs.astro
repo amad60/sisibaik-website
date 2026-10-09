@@ -244,19 +244,20 @@ import { impact } from '../../data/site';
     margin: 0;
   }
   .p1 {
-    grid-column: 1 / 9;
-    grid-row: 1 / 8;
+    grid-column: 1 / 8;
+    grid-row: 1 / 7;
+    margin-bottom: 1.4rem !important;
     rotate: -2.5deg;
     z-index: 1;
   }
   .p2 {
     grid-column: 8 / 13;
-    grid-row: 3 / 10;
+    grid-row: 2 / 9;
     rotate: 3deg;
     z-index: 2;
   }
   .p3 {
-    grid-column: 3 / 8;
+    grid-column: 2 / 7;
     grid-row: 7 / 13;
     rotate: -1deg;
     z-index: 3;
@@ -265,7 +266,7 @@ import { impact } from '../../data/site';
     padding-bottom: 2.4rem;
   }
   .fact {
-    grid-column: 8 / 13;
+    grid-column: 7 / 13;
     grid-row: 10 / 13;
     align-self: end;
     z-index: 4;
@@ -429,23 +430,25 @@ import { impact } from '../../data/site';
   }
   @media (max-width: 560px) {
     .collage {
-      aspect-ratio: 1 / 1.25;
+      aspect-ratio: auto;
+      grid-template-rows: repeat(10, 9vw) auto;
     }
     .p1 {
-      grid-column: 1 / 11;
+      grid-column: 1 / 12;
       grid-row: 1 / 6;
     }
     .p2 {
-      grid-column: 6 / 13;
-      grid-row: 5 / 10;
+      grid-column: 7 / 13;
+      grid-row: 6 / 11;
     }
     .p3 {
       grid-column: 1 / 7;
       grid-row: 6 / 11;
     }
     .fact {
-      grid-column: 3 / 13;
-      grid-row: 10 / 13;
+      grid-column: 1 / 13;
+      grid-row: 11;
+      margin-top: 1.4rem;
     }
     .collage .print figcaption {
       font-size: 0.8rem;
