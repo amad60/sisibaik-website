@@ -203,17 +203,17 @@
       "permanent": true
     },
     {
-      "source": "/home/program-utama/:path*",
+      "source": "/home/program-utama/:path*{/}?",
       "destination": "/program-utama/",
       "permanent": true
     },
     {
-      "source": "/home/patungan-sisi-baik/:path*",
+      "source": "/home/patungan-sisi-baik/:path*{/}?",
       "destination": "/program-utama/",
       "permanent": true
     },
     {
-      "source": "/special-kids-indonesia-bisa-membaca/:path*",
+      "source": "/special-kids-indonesia-bisa-membaca/:path*{/}?",
       "destination": "/program-utama/",
       "permanent": true
     },
@@ -263,7 +263,7 @@
       "permanent": true
     },
     {
-      "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*",
+      "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*{/}?",
       "destination": "/stories/",
       "permanent": true
     }
