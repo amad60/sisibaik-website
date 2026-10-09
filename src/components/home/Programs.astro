@@ -1,0 +1,329 @@
+---
+import { Image } from 'astro:assets';
+import Photo from '../Photo.astro';
+import Icon from '../Icon.astro';
+import { brandImg } from '../../lib/images';
+---
+<section class="section programs" id="program" aria-labelledby="program-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-reveal><span class="num">02</span> Program Utama</p>
+      <h2 id="program-title" class="h1" data-reveal style="--d:.08s">
+        Dua pintu menuju <span class="ital accent">masa depan</span> yang sempat tertutup.
+      </h2>
+      <p class="lede" data-reveal style="--d:.14s">Dari anak usia pra-SD yang belum bisa membaca, hingga lulusan SMA dan SMK yang kesulitan melanjutkan ke perguruan tinggi.</p>
+    </div>
+
+    <article class="program ibm" id="indonesia-bisa-membaca">
+      <div class="media">
+        <div class="frame big" data-reveal="mask">
+          <Photo name="ibm-hari-pertama-2025" alt="Puluhan siswa Indonesia Bisa Membaca duduk bersama di hari pertama tahun ajaran 2025-2026" sizes="(min-width: 1000px) 55vw, 100vw" position="50% 40%" />
+        </div>
+        <figure class="print tape small" data-parallax="0.06" data-reveal style="--d:.3s">
+          <Photo name="belajar-menulis" alt="Anak-anak belajar menulis bersama di meja" sizes="220px" widths={[280, 440]} />
+          <figcaption>Belajar menulis</figcaption>
+        </figure>
+      </div>
+      <div class="body" data-reveal style="--d:.1s">
+        <span class="chip"><Image src={brandImg('logo-ibm')} alt="Indonesia Bisa Membaca" width={220} height={87} /></span>
+        <h3 class="h2">Indonesia Bisa Membaca</h3>
+        <p>
+          Kelompok belajar baca, tulis, dan hitung bebas biaya di Ratu Jaya, Depok. Prioritasnya anak-anak dari keluarga pra sejahtera, dan kelas ini juga menerima anak berkebutuhan khusus yang sulit diterima di sekolah konvensional.
+        </p>
+        <ul class="ticks">
+          <li><strong>Senin sampai Kamis</strong> membaca, menulis, dan berhitung mulai pukul 08.00 WIB.</li>
+          <li><strong>Jumat</strong> budi pekerti, makan bersama, dan bincang dengan orang tua siswa.</li>
+          <li><strong>Tanpa biaya.</strong> Tas, buku tulis, pensil, dan penghapus disediakan.</li>
+          <li><strong>Ibu-ibu di sekitar</strong> diajak ikut menjadi pengajar bagi anak-anak di lingkungannya.</li>
+        </ul>
+        <a class="link-arrow" href="/program-utama/#indonesia-bisa-membaca">Selengkapnya <Icon name="arrow-up-right" /></a>
+      </div>
+    </article>
+
+    <article class="program kd" id="kampus-darurat">
+      <div class="body" data-reveal>
+        <span class="chip chip--blue"><Image src={brandImg('logo-kampus-darurat')} alt="Kampus Darurat" width={220} height={79} /></span>
+        <h3 class="h2">Kampus Darurat</h3>
+        <p>
+          Solusi bagi teman-teman lulusan SMA atau SMK yang kesulitan melanjutkan ke perguruan tinggi. Sisi Baik merancang pelatihan intensif di bidang media dan konten untuk meningkatkan peluang di dunia kerja, dengan bimbingan para ahli dan dukungan emosional.
+        </p>
+        <p class="soon"><span class="pulse" aria-hidden="true"></span> Program sedang disiapkan. Ikuti kabarnya di media sosial kami.</p>
+        <a class="link-arrow" href="/program-utama/#kampus-darurat">Tentang Kampus Darurat <Icon name="arrow-up-right" /></a>
+      </div>
+      <div class="media">
+        <div class="frame big arch" data-reveal="mask">
+          <Photo name="workshop-film-1" alt="Siswa SMK mengikuti workshop perfilman yang digelar Sisi Baik" sizes="(min-width: 1000px) 45vw, 100vw" />
+        </div>
+        <p class="caption" data-reveal>Workshop perfilman Sisi Baik untuk lebih dari 60 siswa SMK Tunas Multi Raya Depok, Oktober 2025.</p>
+      </div>
+    </article>
+
+    <div class="patungan" id="patungan">
+      <div class="p-head" data-reveal>
+        <h3 class="h2">Patungan <span class="ital">Sisi Baik</span></h3>
+        <p>Gerakan gotong royong bersama Warga Baik untuk kebutuhan yang mendesak.</p>
+      </div>
+      <ul class="cards">
+        <li class="card c1" data-reveal>
+          <span class="kicker">Untuk pelajar</span>
+          <h4>Patungan SPP</h4>
+          <p>Membantu siswa dari keluarga tidak mampu melunasi tunggakan SPP agar bisa ikut ujian dan mengambil ijazahnya.</p>
+          <a class="link-arrow" href="/program-utama/#patungan-spp">Cara kerjanya <Icon name="arrow-up-right" /></a>
+        </li>
+        <li class="card c2" data-reveal style="--d:.08s">
+          <span class="kicker">Saat Idul Fitri</span>
+          <h4>Patungan Opor</h4>
+          <p>Paket opor untuk anak kost, pekerja harian lepas, dan warga marjinal di Jabodetabek agar bisa ikut menikmati hari raya.</p>
+          <a class="link-arrow" href="/program-utama/#patungan-opor">Lihat laporannya <Icon name="arrow-up-right" /></a>
+        </li>
+        <li class="card c3" data-reveal style="--d:.16s">
+          <span class="kicker">Untuk kelas IBM</span>
+          <h4>Patungan Alat Tulis</h4>
+          <p>Perlengkapan belajar bagi siswa Indonesia Bisa Membaca, supaya tidak ada anak yang berhenti belajar karena pensilnya habis.</p>
+          <a class="link-arrow" href="/do-donate/">Ikut patungan <Icon name="arrow-up-right" /></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .programs {
+    background: var(--paper-2);
+    border-radius: clamp(28px, 5vw, 64px) clamp(28px, 5vw, 64px) 0 0;
+  }
+  .head {
+    max-width: 900px;
+    margin-bottom: clamp(3.5rem, 7vw, 6rem);
+  }
+  .head .lede {
+    margin-top: 1.5rem;
+    max-width: 52ch;
+  }
+  .program {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 5.5rem);
+    align-items: center;
+  }
+  .program + .program {
+    margin-top: clamp(5rem, 10vw, 8.5rem);
+  }
+  .kd {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+  .media {
+    position: relative;
+  }
+  .big {
+    aspect-ratio: 5 / 4;
+  }
+  .big :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .arch {
+    border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+    aspect-ratio: 1 / 1;
+  }
+  .small {
+    position: absolute;
+    right: -3%;
+    bottom: -12%;
+    width: 34%;
+    aspect-ratio: 0.85;
+    rotate: 4deg;
+    margin: 0;
+  }
+  .small :global(picture) {
+    display: block;
+    height: 100%;
+  }
+  .chip {
+    display: inline-flex;
+    padding: 0.7rem 1rem;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .chip :global(img) {
+    height: 38px;
+    width: auto;
+  }
+  .chip--blue {
+    background: #fff;
+  }
+  .body h3 {
+    margin: 1.4rem 0 1rem;
+  }
+  .body > p {
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+  .ticks {
+    list-style: none;
+    padding: 0;
+    margin: 1.6rem 0 2rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .ticks li {
+    position: relative;
+    padding-left: 2rem;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+  }
+  .ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141b3d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4L18 8'/%3E%3C/svg%3E") center / 70% no-repeat;
+  }
+  .ticks strong {
+    color: var(--ink);
+  }
+  .soon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0.4rem 0 1.8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    font-size: 0.92rem;
+    font-weight: 550;
+  }
+  .pulse {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  .patungan {
+    margin-top: clamp(6rem, 12vw, 10rem);
+  }
+  .p-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.4rem;
+  }
+  .p-head p {
+    margin: 0;
+    max-width: 36ch;
+    color: var(--muted);
+  }
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  .card {
+    position: relative;
+    padding: 2rem 1.8rem 1.8rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    overflow: hidden;
+    transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    right: -60px;
+    top: -60px;
+    border-radius: 50%;
+    background: var(--sun-soft);
+    transition: transform 0.8s var(--ease-out);
+    z-index: 0;
+  }
+  .c2::after {
+    background: var(--clay-soft);
+  }
+  .c3::after {
+    background: var(--blue-soft);
+  }
+  .card > * {
+    position: relative;
+    z-index: 1;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 0 1px var(--line), 0 30px 50px -30px rgb(20 27 61 / 0.4);
+  }
+  .card:hover::after {
+    transform: scale(1.5);
+  }
+  .kicker {
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .card h4 {
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.9rem;
+    line-height: 1.05;
+    margin: 0.2rem 0 0;
+  }
+  .card p {
+    margin: 0 0 0.6rem;
+    color: var(--ink-2);
+    font-size: 0.98rem;
+    flex: 1;
+  }
+
+  @media (max-width: 1000px) {
+    .program,
+    .kd {
+      grid-template-columns: 1fr;
+    }
+    .kd .media {
+      order: -1;
+    }
+    .small {
+      width: 32%;
+      bottom: -8%;
+    }
+    .cards {
+      grid-template-columns: 1fr;
+    }
+    .arch {
+      aspect-ratio: 4 / 3.4;
+    }
+  }
+</style>

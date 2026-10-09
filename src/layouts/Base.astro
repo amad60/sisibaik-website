@@ -1,0 +1,157 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  published?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description = site.tagline,
+  image = '/og/og-default.jpg',
+  type = 'website',
+  published,
+  jsonLd,
+} = Astro.props;
+
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Peluang yang sama untuk setiap anak`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  logo: new URL('/icon-512.png', Astro.site).href,
+  email: site.email,
+  telephone: '+6285179766083',
+  description: site.tagline,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jalan Cagar Alam Selatan RT.06/RW.04 Nomor 3, Kelurahan Ratu Jaya, Kecamatan Cipayung',
+    addressLocality: 'Depok',
+    addressRegion: 'Jawa Barat',
+    postalCode: '16439',
+    addressCountry: 'ID',
+  },
+  sameAs: site.social.map((s) => s.href),
+};
+---
+<!doctype html>
+<html lang="id" id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f7f0e3" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title ?? fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {published && <meta property="article:published_time" content={published} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@sisibaik_corp" />
+    <meta name="twitter:title" content={title ?? fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Langsung ke konten</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+      // Gentle parallax: elements drift by data-parallax * distance from viewport centre.
+      const drifters = Array.from(document.querySelectorAll<HTMLElement>('[data-parallax]'));
+      if (!reduce && drifters.length) {
+        let ticking = false;
+        const update = () => {
+          const vh = window.innerHeight;
+          for (const el of drifters) {
+            const r = el.getBoundingClientRect();
+            if (r.bottom < -200 || r.top > vh + 200) continue;
+            const offset = (r.top + r.height / 2 - vh / 2) * Number(el.dataset.parallax || 0.08);
+            el.style.translate = `0 ${offset.toFixed(1)}px`;
+          }
+          ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        }, { passive: true });
+        update();
+      }
+
+      document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const value = btn.dataset.copy ?? '';
+          try {
+            await navigator.clipboard.writeText(value);
+          } catch {
+            const t = document.createElement('textarea');
+            t.value = value;
+            document.body.append(t);
+            t.select();
+            document.execCommand('copy');
+            t.remove();
+          }
+          btn.classList.add('is-copied');
+          const label = btn.querySelector('[data-copy-label]');
+          const original = label?.textContent;
+          if (label) label.textContent = 'Tersalin';
+          window.setTimeout(() => {
+            btn.classList.remove('is-copied');
+            if (label && original) label.textContent = original;
+          }, 2200);
+        });
+      });
+    </script>
+  </body>
+</html>

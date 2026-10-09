@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import { brandImg } from '../lib/images';
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+const socialIcon = { Instagram: 'instagram', YouTube: 'youtube', TikTok: 'tiktok', X: 'x' } as const;
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="intro">
+        <Image src={brandImg('logo-sisi-baik')} alt="Sisi Baik Project" width={160} height={153} class="logo" />
+        <p class="tag">{site.tagline}</p>
+        <p class="hash">{site.hashtag}</p>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h2 class="col-title">Jelajahi</h2>
+          <ul>
+            <li><a href="/tentang-kami/">Tentang Kami</a></li>
+            <li><a href="/program-utama/">Program Utama</a></li>
+            <li><a href="/stories/">Cerita</a></li>
+            <li><a href="/do-donate/">Do &amp; Donate</a></li>
+            <li><a href={site.docs.impactReport}>Impact Report 2024-2025</a></li>
+            <li><a href={site.docs.companyProfile}>Company Profile</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="col-title">{site.addresses.rumahBaik.label}</h2>
+          <address>{site.addresses.rumahBaik.lines.map((l) => <span>{l}</span>)}</address>
+          <h2 class="col-title second">{site.addresses.surat.label}</h2>
+          <address>{site.addresses.surat.lines.map((l) => <span>{l}</span>)}</address>
+        </div>
+        <div>
+          <h2 class="col-title">Hubungi</h2>
+          <ul class="contact">
+            <li><a href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> WhatsApp {site.phoneDisplay}</a></li>
+            <li><a href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a></li>
+          </ul>
+          <h2 class="col-title second">Ikuti</h2>
+          <ul class="social">
+            {site.social.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener" aria-label={`${s.label} ${s.handle}`}>
+                  <Icon name={socialIcon[s.label as keyof typeof socialIcon]} size={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="giant" aria-hidden="true">Sisi <span class="ital">Baik</span></div>
+
+    <div class="bottom">
+      <p>&copy; {year} {site.legalName}. Seluruh hak dilindungi.</p>
+      <a href="#top" class="to-top">Kembali ke atas <Icon name="arrow" class="up" size={16} /></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    padding-top: clamp(4rem, 9vw, 7rem);
+    overflow: hidden;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+  .logo {
+    width: 88px;
+    height: auto;
+  }
+  .tag {
+    margin: 1.4rem 0 0.6rem;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.35;
+    font-variation-settings: 'SOFT' 100;
+    max-width: 26ch;
+  }
+  .hash {
+    color: var(--sun);
+    font-weight: 600;
+    margin: 0;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .col-title {
+    font: 600 0.78rem/1 var(--sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(247 240 227 / 0.6);
+    margin: 0 0 1rem;
+  }
+  .col-title.second {
+    margin-top: 2rem;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  a {
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a:hover {
+    color: var(--sun);
+  }
+  address {
+    font-style: normal;
+    display: grid;
+    gap: 0.15rem;
+    color: rgb(247 240 227 / 0.88);
+    font-size: 0.96rem;
+  }
+  .contact a {
+    display: inline-flex;
+    gap: 0.55rem;
+    align-items: center;
+    font-size: 0.96rem;
+    word-break: break-word;
+  }
+  .social {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .social a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgb(247 240 227 / 0.25);
+    transition: background 0.3s, color 0.3s, transform 0.4s var(--ease-out);
+  }
+  .social a:hover {
+    background: var(--sun);
+    color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .giant {
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-weight: 380;
+    font-size: clamp(5rem, 22vw, 20rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    margin: clamp(3rem, 7vw, 6rem) 0 0;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(247 240 227 / 0.22);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .giant .ital {
+    color: var(--sun);
+    -webkit-text-stroke: 0;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.6rem 0 2rem;
+    border-top: 1px solid rgb(247 240 227 / 0.14);
+    font-size: 0.9rem;
+    color: rgb(247 240 227 / 0.7);
+  }
+  .bottom p {
+    margin: 0;
+  }
+  .to-top {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .to-top :global(.up) {
+    transform: rotate(-90deg);
+  }
+  @media (max-width: 900px) {
+    .top {
+      grid-template-columns: 1fr;
+    }
+    .cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

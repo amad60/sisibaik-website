@@ -1,0 +1,219 @@
+---
+import Photo from '../Photo.astro';
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+
+const stats = [
+  { value: 0, prefix: 'Rp', suffix: '', label: 'biaya sekolah di Indonesia Bisa Membaca. Perlengkapan belajar pun disediakan.' },
+  { value: 30, prefix: '', suffix: '+', label: 'tahun Ibu Tien mengajar secara sukarela, tanpa menarik biaya sepeser pun.' },
+  { value: 28, prefix: '', suffix: '', label: 'siswa belajar bersama di kelas Indonesia Bisa Membaca tahun ajaran 2025-2026.' },
+  { value: 19, prefix: '', suffix: '', label: 'siswa lulus pada Mei 2026 dan melanjutkan ke jenjang pendidikan berikutnya.' },
+];
+---
+<section class="section impact" id="dampak" aria-labelledby="impact-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow light" data-reveal><span class="num">03</span> Dampak</p>
+      <h2 id="impact-title" class="h1" data-reveal style="--d:.08s">
+        Pendidikan bukan hanya soal belajar, tetapi tentang <span class="ital sun">peluang hidup.</span>
+      </h2>
+    </div>
+
+    <ul class="stats">
+      {stats.map((s, i) => (
+        <li data-reveal style={`--d:${i * 0.08}s`}>
+          <span class="value"><span>{s.prefix}</span><span data-count={s.value}>{s.value}</span><span>{s.suffix}</span></span>
+          <p>{s.label}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="report">
+      <figure class="frame grad" data-reveal="mask">
+        <Photo name="class-of-2025" alt="Siswa Indonesia Bisa Membaca 2025-2026 berfoto bersama pada hari pelepasan" sizes="(min-width: 1000px) 62vw, 100vw" />
+      </figure>
+      <div class="report-card" data-reveal style="--d:.2s">
+        <span class="kicker">Laporan terbaru</span>
+        <h3 class="h3">Impact Report 2024-2025</h3>
+        <p>Rangkuman perjalanan Indonesia Bisa Membaca, Patungan SPP, dan gerakan Sisi Baik lainnya sepanjang tahun.</p>
+        <a class="btn btn--sun" href={site.docs.impactReport} target="_blank" rel="noopener">
+          Unduh laporan (PDF) <Icon name="download" class="arrow" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact {
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .impact::before {
+    content: '';
+    position: absolute;
+    width: 640px;
+    height: 640px;
+    left: -220px;
+    top: -260px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(33 64 154 / 0.7), transparent);
+    pointer-events: none;
+  }
+  .light {
+    color: rgb(247 240 227 / 0.8);
+  }
+  .light .num {
+    color: var(--sun);
+  }
+  .head {
+    position: relative;
+    max-width: 1000px;
+  }
+  .sun {
+    color: var(--sun);
+  }
+  .stats {
+    list-style: none;
+    margin: clamp(3.5rem, 7vw, 6rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+  .stats li {
+    padding: 0 1.6rem 0 0;
+    border-left: 1px solid rgb(247 240 227 / 0.18);
+    padding-left: 1.6rem;
+  }
+  .stats li:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .value {
+    display: flex;
+    align-items: baseline;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-style: italic;
+    font-weight: 360;
+    font-size: clamp(3.6rem, 2.4rem + 4vw, 6.6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    font-variant-numeric: tabular-nums;
+  }
+  .value span:first-child,
+  .value span:last-child {
+    color: var(--sun);
+    font-size: 0.55em;
+  }
+  .stats p {
+    margin: 1rem 0 0;
+    color: rgb(247 240 227 / 0.78);
+    font-size: 0.96rem;
+    max-width: 28ch;
+  }
+
+  .report {
+    position: relative;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .grad {
+    aspect-ratio: 16 / 8;
+    margin: 0;
+  }
+  .grad :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .report-card {
+    position: absolute;
+    right: clamp(1rem, 3vw, 2.5rem);
+    bottom: clamp(1rem, 3vw, 2.5rem);
+    width: min(400px, 46%);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.5);
+  }
+  .kicker {
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .report-card h3 {
+    margin: 0.6rem 0 0.7rem;
+  }
+  .report-card p {
+    margin: 0 0 1.4rem;
+    color: var(--ink-2);
+    font-size: 0.97rem;
+  }
+
+  @media (max-width: 1000px) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 2.8rem;
+    }
+    .stats li:nth-child(3) {
+      border-left: 0;
+      padding-left: 0;
+    }
+    .grad {
+      aspect-ratio: 4 / 3;
+    }
+    .report-card {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: auto;
+      margin: -4rem 1rem 0;
+    }
+  }
+  @media (max-width: 520px) {
+    .stats li {
+      padding-right: 0.8rem;
+      padding-left: 0.9rem;
+    }
+    .report-card {
+      margin: -3rem 0.5rem 0;
+      padding: 1.6rem;
+    }
+  }
+</style>
+
+<script>
+  const els = document.querySelectorAll<HTMLElement>('[data-count]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = new Intl.NumberFormat('id-ID');
+  const run = (el: HTMLElement) => {
+    const target = Number(el.dataset.count);
+    if (reduce || target === 0) return;
+    const start = performance.now();
+    const dur = 1600;
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 4);
+      el.textContent = fmt.format(Math.round(target * eased));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    el.textContent = '0';
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        run(e.target as HTMLElement);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  els.forEach((el) => io.observe(el));
+</script>

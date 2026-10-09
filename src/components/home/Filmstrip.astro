@@ -1,0 +1,103 @@
+---
+import Photo from '../Photo.astro';
+
+const shots = [
+  { name: 'ibm-hari-pertama-2024', alt: 'Hari pertama kelas Indonesia Bisa Membaca, Juli 2024', cap: 'Hari pertama, Juli 2024' },
+  { name: 'pelepasan-2026-tawa', alt: 'Anak-anak tertawa bersama saat acara pelepasan', cap: 'Pelepasan IBM, Mei 2026' },
+  { name: 'guest-tutor-3', alt: 'Pengajar tamu bercerita di depan anak-anak', cap: 'Guest Tutor Week' },
+  { name: 'budi-pekerti', alt: 'Pelajaran budi pekerti di kelas Indonesia Bisa Membaca', cap: 'Jumat, budi pekerti' },
+  { name: 'lomba-hut-ri', alt: 'Seorang anak mengikuti lomba makan kerupuk', cap: 'Lomba 17 Agustus' },
+  { name: 'tanampangan-1', alt: 'Tim TanamPangan.id berbagi dengan para orang tua siswa', cap: 'Bersama TanamPangan.id' },
+  { name: 'pelepasan-2026-anak', alt: 'Seorang siswa duduk di kursi saat acara pelepasan', cap: 'Lulusan 2025-2026' },
+  { name: 'fik-ui', alt: 'Tim FIK UI memberi konsultasi kesehatan kepada orang tua siswa', cap: 'Pengabdian FIK UI' },
+  { name: 'workshop-film-2', alt: 'Siswa SMK mengikuti workshop perfilman', cap: 'Workshop perfilman' },
+];
+---
+<section class="strip" aria-label="Potret kegiatan Sisi Baik Project">
+  <div class="track">
+    {[0, 1].map((dup) => (
+      <ul class="row" aria-hidden={dup === 1 ? 'true' : undefined}>
+        {shots.map((s, i) => (
+          <li class={`shot s${i % 4}`}>
+            <figure>
+              <div class="frame">
+                <Photo name={s.name} alt={dup ? '' : s.alt} sizes="320px" widths={[360, 640]} />
+              </div>
+              <figcaption>{s.cap}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</section>
+
+<style>
+  .strip {
+    position: relative;
+    padding-block: 1rem 2rem;
+    overflow: hidden;
+    mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: drift 70s linear infinite;
+  }
+  .strip:hover .track {
+    animation-play-state: paused;
+  }
+  .row {
+    display: flex;
+    gap: clamp(0.9rem, 1.6vw, 1.4rem);
+    padding-right: clamp(0.9rem, 1.6vw, 1.4rem);
+    margin: 0;
+    list-style: none;
+    align-items: flex-start;
+  }
+  .shot figure {
+    margin: 0;
+    width: clamp(200px, 22vw, 300px);
+  }
+  .shot .frame {
+    aspect-ratio: 4 / 3;
+    border-radius: 22px;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .shot:hover .frame {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+  .s1 .frame {
+    aspect-ratio: 3 / 4;
+    border-radius: 120px 120px 22px 22px;
+  }
+  .s2 {
+    margin-top: 2.4rem;
+  }
+  .s3 .frame {
+    aspect-ratio: 1;
+    border-radius: 50% 50% 22px 50%;
+  }
+  .shot :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  figcaption {
+    margin-top: 0.7rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  @keyframes drift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+      overflow-x: auto;
+    }
+  }
+</style>
