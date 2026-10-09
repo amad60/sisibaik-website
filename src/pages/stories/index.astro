@@ -1,0 +1,136 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import StoryCard from '../../components/StoryCard.astro';
+import { stories, categories } from '../../lib/stories';
+---
+<Base title="Cerita" description="Kabar terbaru dari kelas Indonesia Bisa Membaca, penerima Patungan SPP, dan kolaborasi Sisi Baik Project bersama Warga Baik dan Mitra Kebaikan.">
+  <PageHero
+    eyebrow="Cerita Baik"
+    lede="Kabar dari kelas Indonesia Bisa Membaca, kisah para penerima Patungan SPP, dan kolaborasi bersama Warga Baik serta Mitra Kebaikan."
+  >
+    Setiap anak punya <span class="ital accent">cerita</span> yang layak didengar.
+  </PageHero>
+
+  <section class="list" aria-label="Daftar cerita">
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Saring berdasarkan kategori" data-reveal>
+        <button type="button" class="is-active" data-filter="semua" aria-pressed="true">Semua <span>{stories.length}</span></button>
+        {categories.map((c) => (
+          <button type="button" data-filter={c.slug} aria-pressed="false">{c.label} <span>{c.count}</span></button>
+        ))}
+      </div>
+      <p class="status" aria-live="polite" data-status></p>
+      <div class="grid" data-grid>
+        {stories.map((s, i) => <StoryCard story={s} delay={(i % 3) * 0.06} />)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .list {
+    padding-bottom: clamp(6rem, 12vw, 9rem);
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .filters button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgb(20 27 61 / 0.25);
+    font: 550 0.92rem/1 var(--sans);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .filters button span {
+    font-size: 0.78rem;
+    opacity: 0.6;
+  }
+  .filters button:hover {
+    background: var(--paper-2);
+  }
+  .filters button.is-active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .status {
+    margin: 1rem 0 2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    min-height: 1.4em;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 3.2rem) clamp(1.2rem, 2.5vw, 2rem);
+  }
+  .grid :global([hidden]) {
+    display: none;
+  }
+  @media (max-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 600px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin-inline: calc(var(--gutter) * -1);
+      padding-inline: var(--gutter);
+      scrollbar-width: none;
+    }
+    .filters button {
+      flex: none;
+    }
+  }
+</style>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-grid] [data-category]'));
+  const status = document.querySelector<HTMLElement>('[data-status]');
+
+  const apply = (key: string, push = true) => {
+    const valid = buttons.some((b) => b.dataset.filter === key) ? key : 'semua';
+    let shown = 0;
+    for (const card of cards) {
+      const match = valid === 'semua' || card.dataset.category === valid;
+      card.hidden = !match;
+      if (match) {
+        shown += 1;
+        card.classList.add('is-visible');
+      }
+    }
+    for (const b of buttons) {
+      const on = b.dataset.filter === valid;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', String(on));
+    }
+    if (status) status.textContent = valid === 'semua' ? '' : `Menampilkan ${shown} cerita.`;
+    if (push) {
+      const url = new URL(window.location.href);
+      if (valid === 'semua') url.searchParams.delete('kategori');
+      else url.searchParams.set('kategori', valid);
+      history.replaceState(null, '', url);
+    }
+  };
+
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? 'semua')));
+  const initial = new URLSearchParams(window.location.search).get('kategori');
+  if (initial) apply(initial, false);
+</script>

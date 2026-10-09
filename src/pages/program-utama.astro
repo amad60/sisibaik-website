@@ -1,0 +1,650 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import StoryCard from '../components/StoryCard.astro';
+import { site, impact } from '../data/site';
+import { brandImg } from '../lib/images';
+import { stories } from '../lib/stories';
+
+const sppStories = stories.filter((s) => s.category === 'Patungan SPP').slice(0, 3);
+const ibmCost = [
+  'Makan bersama setiap minggu',
+  'Alat tulis dan perlengkapan tahun ajaran baru',
+  'Honor guru pembantu',
+  'Listrik dan kebersihan kelas',
+  'Bantuan bagi anak yang lulus ke SD',
+  'Kegiatan pelepasan siswa',
+];
+const gallery = [
+  { name: 'ibm-hari-pertama-2024', alt: 'Hari pertama kelas Indonesia Bisa Membaca, Juli 2024', cap: 'Hari pertama, 2024' },
+  { name: 'karya-siswa', alt: 'Siswi memperlihatkan hasil karyanya', cap: 'Karya siswa' },
+  { name: 'guest-tutor-1', alt: 'Tutor tamu mengajar siswa Indonesia Bisa Membaca', cap: 'Guest Tutor Week' },
+  { name: 'tanampangan-1', alt: 'Siswa belajar bertani bersama TanamPangan.id', cap: 'Belajar bertani' },
+  { name: 'perpisahan-2025', alt: 'Pelepasan siswa Indonesia Bisa Membaca, Juni 2025', cap: 'Pelepasan 2025' },
+];
+const wa = (text: string) => `${site.whatsapp}?text=${encodeURIComponent(text)}`;
+---
+<Base title="Program Utama" description="Indonesia Bisa Membaca, kelas calistung bebas biaya di Depok, dan Patungan SPP, bantuan tunggakan sekolah. Ditambah Kampus Darurat dan Patungan Opor.">
+  <PageHero
+    eyebrow="Program Utama"
+    lede="Indonesia Bisa Membaca membuka pintu pertama: kemampuan membaca, menulis, dan berhitung. Patungan SPP menjaga agar pintu itu tidak tertutup kembali karena tunggakan sekolah."
+    photo="ibm-pengarahan-2025"
+    photoAlt="Siswa Indonesia Bisa Membaca mendengarkan pengarahan di awal tahun ajaran 2025-2026"
+    caption="Awal tahun ajaran 2025-2026"
+  >
+    Dari mengeja huruf pertama, hingga <span class="ital accent">mengambil ijazah.</span>
+    <nav slot="after" class="jump" aria-label="Lompat ke program" data-reveal style="--d:.2s">
+      <a href="#indonesia-bisa-membaca">Indonesia Bisa Membaca</a>
+      <a href="#patungan-spp">Patungan SPP</a>
+      <a href="#kampus-darurat">Kampus Darurat</a>
+      <a href="#patungan-opor">Patungan Opor</a>
+    </nav>
+  </PageHero>
+
+  <section class="section block" id="indonesia-bisa-membaca" aria-labelledby="ibm-h">
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <span class="chip" data-reveal><Image src={brandImg('logo-ibm')} alt="Logo Indonesia Bisa Membaca" width={220} height={87} /></span>
+          <h2 id="ibm-h" class="h1" data-reveal style="--d:.06s">Indonesia Bisa <span class="ital accent">Membaca</span></h2>
+        </div>
+        <div class="intro-text" data-reveal style="--d:.12s">
+          <p class="big">Kelompok belajar baca, tulis, dan hitung bebas biaya di Ratu Jaya, Depok. Kelas ini menghidupkan kembali LSM Edukasi Dasar yang dirintis Ibu Tien Suryantini, untuk memutus rantai buta huruf di keluarga yang memiliki keterbatasan pendidikan.</p>
+          <p>Kelas ini terbuka secara inklusif. Usia pesertanya bisa 6 sampai 20 tahun, karena kebutuhan belajar dasar tidak selalu berhenti di usia sekolah awal. Kami juga menerima peserta dengan <em>different ability</em>, termasuk anak dengan Down syndrome dan keterlambatan berpikir. Bagi sebagian peserta, calistung adalah bekal hidup: agar kelak bisa berdagang, membantu usaha keluarga, dan tidak mudah ditipu.</p>
+        </div>
+      </div>
+
+      <div class="facts">
+        <div class="week" data-reveal>
+          <h3>Sepekan di kelas</h3>
+          <dl>
+            <div><dt>Senin sampai Kamis</dt><dd>Membaca, menulis, dan berhitung, mulai pukul 08.00 WIB.</dd></div>
+            <div><dt>Jumat</dt><dd>Belajar budi pekerti, lalu makan bersama.</dd></div>
+            <div><dt>Biaya</dt><dd>Gratis, dari pendaftaran hingga kegiatan belajar. Tas, buku tulis, pensil, dan penghapus disediakan.</dd></div>
+          </dl>
+        </div>
+        <ul class="nums" data-reveal style="--d:.08s">
+          <li><strong>24</strong><span>siswa pada tahun ajaran 2024-2025, 21 di antaranya aktif hingga akhir tahun.</span></li>
+          <li><strong>26</strong><span>siswa pada tahun ajaran 2025-2026, 6 di antaranya melanjutkan dari tahun sebelumnya.</span></li>
+          <li><strong>19</strong><span>siswa lulus pada Mei 2026 dan melanjutkan ke jenjang berikutnya.</span></li>
+        </ul>
+        <div class="cost" data-reveal style="--d:.16s">
+          <p class="k">Kebutuhan kelas per tahun</p>
+          <p class="v">{impact.ibmYearlyCost}</p>
+          <ul>{ibmCost.map((c) => <li>{c}</li>)}</ul>
+          <a class="btn btn--sun btn--small" href="/do-donate/">Bantu biaya kelas <Icon name="arrow" class="arrow" /></a>
+        </div>
+      </div>
+
+      <ul class="gallery" aria-label="Suasana kelas">
+        {gallery.map((g, i) => (
+          <li data-reveal style={`--d:${i * 0.06}s`}>
+            <figure>
+              <div class="frame"><Photo name={g.name} alt={g.alt} sizes="(min-width: 1000px) 20vw, 60vw" widths={[360, 640, 900]} /></div>
+              <figcaption>{g.cap}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+
+      <aside class="register" data-reveal>
+        <div>
+          <p class="k">Pendaftaran terakhir: tahun ajaran 2025-2026</p>
+          <h3 class="h3">Dibuka 2-5 Juni 2025 di kelas Indonesia Bisa Membaca, untuk maksimal 40 siswa.</h3>
+          <p>Calon siswa membawa dokumen asli: akta atau surat keterangan kelahiran, kartu keluarga, KTP orang tua, dan surat keterangan tidak mampu jika ada. Siswa lama mendaftar ulang untuk pengkinian data. Jadwal pendaftaran berikutnya kami umumkan di media sosial Sisi Baik.</p>
+        </div>
+        <div class="reg-ctas">
+          <a class="btn" href={wa('Halo Sisi Baik, saya ingin bertanya tentang pendaftaran Indonesia Bisa Membaca.')} target="_blank" rel="noopener"><Icon name="whatsapp" class="arrow" /> Tanya pendaftaran</a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/sisibaikproject" target="_blank" rel="noopener"><Icon name="instagram" class="arrow" /> Ikuti kabarnya</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section block spp" id="patungan-spp" aria-labelledby="spp-h">
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <span class="tag" data-reveal>Program utama sejak 2025</span>
+          <h2 id="spp-h" class="h1" data-reveal style="--d:.06s">Patungan <span class="ital accent">SPP</span></h2>
+        </div>
+        <div class="intro-text" data-reveal style="--d:.12s">
+          <p class="big">Tunggakan sekolah bukan hanya mengganggu keuangan keluarga, tetapi juga mental siswa yang sedang berjuang menuntaskan pendidikannya. Tanpa pelunasan, ada siswa yang tidak bisa ikut ujian, tidak bisa mengambil ijazah, atau terancam tinggal kelas.</p>
+          <p>Bersama Warga Baik dan Mitra Kebaikan, kami membantu siswa SMP, MTs, hingga SMK melunasi tunggakan SPP, uang pangkal, uang ujian, uang praktik, hingga cicilan ujian akhir. Dana patungan juga datang dari penjualan kaos &ldquo;Pernah Nunggak SPP&rdquo; di Toko Sisi Baik.</p>
+        </div>
+      </div>
+
+      <div class="spp-grid">
+        <div class="stat-card" data-reveal>
+          <span class="big-num">76%</span>
+          <p>keluarga mengakui anaknya putus sekolah karena alasan ekonomi. Dari jumlah itu, 67% karena tidak mampu membayar biaya sekolah dan 8,7% karena harus mencari nafkah.</p>
+          <small>BPS, Susenas 2021, dikutip dalam Impact Report Sisi Baik 2024-2025</small>
+        </div>
+        <ul class="nums nums--row" data-reveal style="--d:.08s">
+          <li><strong>{impact.sppRecipients}</strong><span>penerima unik pada 2024-2025</span></li>
+          <li><strong>{impact.sppPayments}</strong><span>kali pembayaran bantuan</span></li>
+          <li><strong>{impact.sppTotal}</strong><span>total bantuan tersalurkan</span></li>
+        </ul>
+        <div class="notes" data-reveal style="--d:.14s">
+          <h3>Lebih dari satu kali pembayaran</h3>
+          <p>Untuk saat ini bantuan maksimal per siswa Rp1.000.000 sampai Rp1.200.000, menyesuaikan kemampuan kas bantuan yang bisa kami galang. Para penerima juga tergabung dalam Grup WhatsApp PSPP, ruang untuk saling mendukung serta berbagi info beasiswa, lowongan kerja bagi lulusan SMA, dan kesempatan lain.</p>
+          <a class="link-arrow" href={wa('Halo Sisi Baik, saya ingin bertanya tentang Patungan SPP.')} target="_blank" rel="noopener">Tanya tentang Patungan SPP <Icon name="arrow-up-right" /></a>
+        </div>
+      </div>
+
+      <div class="spp-stories">
+        <div class="row-head" data-reveal>
+          <h3 class="h3">Kisah para penerima</h3>
+          <a class="link-arrow" href="/stories/?kategori=patungan-spp">Semua kisah Patungan SPP <Icon name="arrow-up-right" /></a>
+        </div>
+        <div class="cards">
+          {sppStories.map((s, i) => <StoryCard story={s} delay={i * 0.08} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section block duo" aria-label="Program lainnya">
+    <div class="wrap duo-grid">
+      <article id="kampus-darurat" aria-labelledby="kd-h">
+        <div class="frame arch" data-reveal="mask">
+          <Photo name="workshop-film-2" alt="Siswa SMK mengikuti workshop perfilman Sisi Baik" sizes="(min-width: 900px) 45vw, 100vw" />
+        </div>
+        <div class="duo-body" data-reveal>
+          <span class="soon"><span class="pulse" aria-hidden="true"></span> Segera hadir</span>
+          <span class="chip chip--sm"><Image src={brandImg('logo-kampus-darurat')} alt="Logo Kampus Darurat" width={200} height={72} /></span>
+          <h2 id="kd-h" class="h2">Kampus Darurat</h2>
+          <p>Solusi bagi teman-teman lulusan SMA atau SMK yang kesulitan melanjutkan ke perguruan tinggi. Sisi Baik sedang menyiapkan pelatihan intensif di bidang media dan konten untuk meningkatkan peluang di dunia kerja, dengan bantuan ahli dan dukungan emosional.</p>
+          <p class="cap">Foto: workshop perfilman Sisi Baik untuk lebih dari 60 siswa SMK Tunas Multi Raya, Depok, Oktober 2025.</p>
+        </div>
+      </article>
+      <article id="patungan-opor" aria-labelledby="opor-h">
+        <div class="frame arch arch--b" data-reveal="mask">
+          <Photo name="patungan-opor" alt="Poster Patungan Opor Sisi Baik" sizes="(min-width: 900px) 45vw, 100vw" />
+        </div>
+        <div class="duo-body" data-reveal>
+          <span class="kick">Setiap Idul Fitri</span>
+          <h2 id="opor-h" class="h2">Patungan Opor</h2>
+          <p>Hidangan hari raya bagi mereka yang tidak bisa menikmatinya dengan layak: masyarakat menengah ke bawah, pekerja harian tanpa THR, dan para perantau di kosan. Program ini menjaga akar kemanusiaan yang sejak awal membentuk gerak Sisi Baik.</p>
+          <p class="opor-num"><strong>{impact.oporRecipients2024}</strong> penerima pada 2024 <Icon name="arrow" /> <strong>{impact.oporRecipients2025}</strong> penerima pada 2025</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section closing">
+    <div class="wrap">
+      <div class="band" data-reveal>
+        <h2 class="h2">Setiap program berjalan karena <span class="ital">Warga Baik.</span></h2>
+        <a class="btn btn--sun" href="/do-donate/">Ikut bergerak <Icon name="arrow" class="arrow" /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .jump a {
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgb(20 27 61 / 0.25);
+    font-size: 0.9rem;
+    font-weight: 550;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .jump a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .block {
+    border-top: 1px solid var(--line);
+  }
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .intro h2 {
+    margin-top: 1.2rem;
+  }
+  .chip {
+    display: inline-flex;
+    padding: 0.7rem 1rem;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .chip :global(img) {
+    height: 40px;
+    width: auto;
+  }
+  .chip--sm :global(img) {
+    height: 30px;
+  }
+  .tag {
+    display: inline-flex;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    background: var(--blue);
+    color: var(--paper);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .intro-text p {
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .intro-text .big {
+    margin-top: 0;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.55rem);
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 1fr);
+    gap: 1.2rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .week,
+  .cost,
+  .nums {
+    border-radius: var(--radius-lg);
+    padding: clamp(1.4rem, 2.6vw, 2rem);
+  }
+  .week {
+    background: var(--paper-2);
+  }
+  .week h3,
+  .notes h3 {
+    margin: 0 0 1rem;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.5rem;
+  }
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  dt {
+    font-weight: 650;
+  }
+  dd {
+    margin: 0.15rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .nums {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    gap: 1.2rem;
+    background: var(--blue);
+    color: var(--paper);
+  }
+  .nums li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .nums strong {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 380;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: clamp(2.4rem, 1.8rem + 1.6vw, 3.4rem);
+    line-height: 1;
+    color: var(--sun);
+    min-width: 2.2ch;
+  }
+  .nums span {
+    font-size: 0.93rem;
+    color: rgb(247 240 227 / 0.88);
+  }
+  .cost {
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+  }
+  .k {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .v {
+    margin: 0.4rem 0 1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: clamp(2rem, 1.6rem + 1.2vw, 2.8rem);
+    line-height: 1;
+    color: var(--sun);
+  }
+  .cost ul {
+    margin: 0 0 1.4rem;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.92rem;
+    color: rgb(247 240 227 / 0.86);
+  }
+  .cost .btn {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .gallery {
+    list-style: none;
+    margin: clamp(3rem, 6vw, 4.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .gallery figure {
+    margin: 0;
+  }
+  .gallery .frame {
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-md);
+  }
+  .gallery li:nth-child(even) {
+    margin-top: 2.5rem;
+  }
+  .gallery li:nth-child(odd) .frame {
+    border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  }
+  .gallery :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .gallery figcaption {
+    margin-top: 0.6rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .register {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto;
+    gap: 2rem;
+    align-items: end;
+    padding: clamp(1.6rem, 3vw, 2.4rem);
+    border-radius: var(--radius-lg);
+    background: var(--sun-soft);
+  }
+  .register .k {
+    color: var(--sun-deep);
+    opacity: 1;
+  }
+  .register h3 {
+    margin: 0.6rem 0 0.8rem;
+    max-width: 30ch;
+  }
+  .register p:not(.k) {
+    margin: 0;
+    color: var(--ink-2);
+    max-width: 70ch;
+  }
+  .reg-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .spp {
+    background: var(--paper-2);
+  }
+  .spp-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 1.2rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .stat-card {
+    padding: clamp(1.4rem, 2.6vw, 2rem);
+    border-radius: var(--radius-lg);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .big-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 360;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: clamp(3.4rem, 2.4rem + 3vw, 5.4rem);
+    line-height: 1;
+    color: var(--sun);
+  }
+  .stat-card p {
+    margin: 0.8rem 0 1rem;
+    font-size: 0.95rem;
+  }
+  .stat-card small {
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+  .nums--row strong {
+    font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.6rem);
+  }
+  .nums--row li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+  .notes {
+    padding: clamp(1.4rem, 2.6vw, 2rem);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+  }
+  .notes p {
+    margin: 0 0 1.2rem;
+    color: var(--ink-2);
+    font-size: 0.97rem;
+  }
+  .spp-stories {
+    margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  }
+  .row-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+  }
+
+  .duo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+  .arch {
+    aspect-ratio: 1 / 0.9;
+    border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  }
+  .arch--b {
+    border-radius: var(--radius-lg) var(--radius-lg) 999px 999px;
+  }
+  .arch :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .duo-body {
+    margin-top: 2rem;
+  }
+  .duo-body h2 {
+    margin: 1rem 0;
+  }
+  .duo-body p {
+    color: var(--ink-2);
+    max-width: 56ch;
+  }
+  .duo-body .cap {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .soon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-right: 0.8rem;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    font-size: 0.85rem;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .chip--sm {
+    vertical-align: middle;
+    padding: 0.45rem 0.7rem;
+  }
+  .pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  .pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+  .kick {
+    font-size: 0.8rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+  .opor-num {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.4rem;
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    background: var(--clay-soft);
+    color: var(--ink) !important;
+  }
+  .opor-num strong {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .opor-num :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .closing {
+    padding-top: 0;
+  }
+  .band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: clamp(2rem, 4vw, 3rem);
+    border-radius: var(--radius-lg);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .band h2 {
+    color: var(--paper);
+    max-width: 18ch;
+  }
+  .band .ital {
+    color: var(--sun);
+  }
+
+  @media (max-width: 1100px) {
+    .facts,
+    .spp-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cost,
+    .notes {
+      grid-column: 1 / -1;
+    }
+    .gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .gallery li:nth-child(n + 4) {
+      display: none;
+    }
+  }
+  @media (max-width: 860px) {
+    .intro,
+    .duo-grid,
+    .register {
+      grid-template-columns: 1fr;
+    }
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .facts,
+    .spp-grid,
+    .cards {
+      grid-template-columns: 1fr;
+    }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin-inline: calc(var(--gutter) * -1);
+      padding: 0 var(--gutter) 0.5rem;
+      scrollbar-width: none;
+    }
+    .gallery li {
+      flex: 0 0 62%;
+      scroll-snap-align: start;
+      display: block !important;
+    }
+  }
+</style>

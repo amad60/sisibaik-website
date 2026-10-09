@@ -1,0 +1,223 @@
+---
+import Icon from '../Icon.astro';
+import Photo from '../Photo.astro';
+import { site } from '../../data/site';
+
+const { rumahBaik, surat } = site.addresses;
+---
+<section class="section contact" id="kontak" aria-labelledby="contact-title">
+  <div class="wrap grid">
+    <div class="copy">
+      <p class="eyebrow" data-reveal><span class="num">07</span> Kontak</p>
+      <h2 id="contact-title" class="h1" data-reveal style="--d:.08s">
+        Mampir ke <span class="ital accent">Rumah Baik,</span> atau sapa kami lebih dulu.
+      </h2>
+
+      <div class="channels" data-reveal style="--d:.14s">
+        <a class="channel" href={site.whatsapp} target="_blank" rel="noopener">
+          <span class="ic"><Icon name="whatsapp" /></span>
+          <span><small>WhatsApp</small>{site.phoneDisplay}</span>
+        </a>
+        <a class="channel" href={`mailto:${site.email}`}>
+          <span class="ic"><Icon name="mail" /></span>
+          <span><small>Email</small>{site.email}</span>
+        </a>
+      </div>
+
+      <div class="addresses">
+        <address data-reveal style="--d:.18s">
+          <h3>{rumahBaik.label}</h3>
+          <p class="sub">Kelas Indonesia Bisa Membaca</p>
+          <p>{rumahBaik.lines.map((l) => <>{l}<br /></>)}</p>
+          <a class="link-arrow" href={rumahBaik.maps} target="_blank" rel="noopener"><Icon name="pin" /> Buka di Google Maps</a>
+        </address>
+        <address data-reveal style="--d:.24s">
+          <h3>{surat.label}</h3>
+          <p class="sub">Alamat korespondensi</p>
+          <p>{surat.lines.map((l) => <>{l}<br /></>)}</p>
+        </address>
+      </div>
+
+      <ul class="social" data-reveal style="--d:.3s" aria-label="Media sosial">
+        {site.social.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener">
+              <Icon name={s.label.toLowerCase() as 'instagram'} /><span>{s.handle}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <figure class="pic" data-reveal="mask">
+      <Photo name="renovasi-kelas-03" alt="Ruang kelas Indonesia Bisa Membaca di Rumah Baik, Ratu Jaya, Depok" sizes="(min-width: 1000px) 40vw, 100vw" />
+      <figcaption>Ruang kelas di Rumah Baik, Ratu Jaya</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-bottom: clamp(6rem, 12vw, 10rem);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .copy .h1 {
+    max-width: 15ch;
+  }
+  .channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2.4rem;
+  }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.8rem 1.4rem 0.8rem 0.8rem;
+    border-radius: 999px;
+    background: var(--paper-2);
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background 0.4s, transform 0.4s var(--ease-out);
+  }
+  .channel:hover {
+    background: var(--sun-soft);
+    transform: translateY(-2px);
+  }
+  .channel small {
+    display: block;
+    font-weight: 500;
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .ic {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .ic :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+  .addresses {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  address {
+    font-style: normal;
+  }
+  address h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.5rem;
+  }
+  .sub {
+    margin: 0.2rem 0 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sun-deep);
+  }
+  address p:not(.sub) {
+    margin: 0 0 1rem;
+    color: var(--ink-2);
+    font-size: 0.97rem;
+  }
+  address .link-arrow {
+    font-size: 0.92rem;
+  }
+  .social {
+    list-style: none;
+    margin: 2.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgb(20 27 61 / 0.22);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
+  }
+  .social a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .social :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+  .pic {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+    position: sticky;
+    top: 110px;
+  }
+  .pic :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pic figcaption {
+    position: absolute;
+    left: 50%;
+    bottom: 1.2rem;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: rgb(247 240 227 / 0.92);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 1000px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .pic {
+      position: relative;
+      top: 0;
+      aspect-ratio: 4 / 3.6;
+      order: -1;
+      max-width: 560px;
+    }
+  }
+  @media (max-width: 600px) {
+    .addresses {
+      grid-template-columns: 1fr;
+    }
+    .channel {
+      width: 100%;
+    }
+  }
+</style>

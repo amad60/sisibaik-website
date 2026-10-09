@@ -12,7 +12,7 @@ const id = `stamp-${Math.random().toString(36).slice(2, 8)}`;
     <defs>
       <path id={id} d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" />
     </defs>
-    <text><textPath href={`#${id}`} startOffset="0">{text}</textPath></text>
+    <text><textPath href={`#${id}`} startOffset="0" textLength="460" lengthAdjust="spacing">{text}</textPath></text>
   </svg>
   <span class="center">{center}</span>
 </div>
@@ -38,9 +38,9 @@ const id = `stamp-${Math.random().toString(36).slice(2, 8)}`;
   }
   text {
     font-family: var(--sans);
-    font-size: 15.5px;
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: 3.4px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     fill: currentColor;
   }

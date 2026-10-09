@@ -27,11 +27,14 @@ import { FOUNDED_YEAR, timeline } from '../../data/site';
           Sejak {FOUNDED_YEAR}, Ibu Tien Suryantini membuka sekolah gratis untuk anak-anak usia TK dan SD di sekitar rumahnya yang belum punya kesempatan mendapatkan pendidikan awal. Sekolah itu dikenal sebagai <em>LSM Edukasi Dasar</em>.
         </p>
         <p data-reveal style="--d:.08s">
-          Pandemi dan usia yang menua membuat kelas itu sempat berhenti, karena Bu Tien adalah satu-satunya pengajar tetap. Pada 2024, Sisi Baik Project menghidupkannya kembali dengan nama <strong>Indonesia Bisa Membaca</strong>, dengan semangat yang sama: memutus rantai buta huruf di keluarga yang memiliki keterbatasan pendidikan.
+          Pada 2020, pandemi dan kesehatan Bu Tien yang mulai menurun membuat kelas itu ditutup. Empat tahun kemudian, Sisi Baik Project menghidupkannya kembali dengan nama <strong>Indonesia Bisa Membaca</strong>, dan Bu Tien kembali mengajar di tahun pertamanya.
+        </p>
+        <p data-reveal style="--d:.1s">
+          Ibu Tien berpulang pada 2026. Kelasnya tetap berjalan, berbekal buku tulis mengajar yang beliau susun, dengan semangat yang sama: menuntaskan buta huruf bagi keluarga yang memiliki keterbatasan pendidikan.
         </p>
         <blockquote class="quote" data-reveal style="--d:.14s">
-          <p>&ldquo;Anak-anak harus rajin belajar agar menjadi orang yang berguna. Gunakan waktu dengan baik. Kalian juga harus sayang orang tua.&rdquo;</p>
-          <footer>Ibu Tien Suryantini, di hari pertama tahun ajaran 2025-2026</footer>
+          <p>&ldquo;Anak-anak harus rajin belajar agar menjadi orang yang berguna. Jangan hanya bermain game. Gunakan waktu dengan baik. Kalian juga harus sayang orang tua.&rdquo;</p>
+          <footer>Pesan Ibu Tien Suryantini di awal tahun ajaran 2025-2026</footer>
         </blockquote>
         <a href="/tentang-kami/" class="link-arrow" data-reveal>Baca perjalanan kami <Icon name="arrow-up-right" /></a>
       </div>
@@ -154,8 +157,8 @@ import { FOUNDED_YEAR, timeline } from '../../data/site';
     margin: clamp(4.5rem, 9vw, 7.5rem) 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 1.25rem;
     position: relative;
   }
   .timeline::before {
@@ -193,6 +196,13 @@ import { FOUNDED_YEAR, timeline } from '../../data/site';
   .timeline li:first-child .dot {
     background: var(--sun);
   }
+  .timeline li:last-child .year {
+    color: var(--ink);
+  }
+  .timeline li:last-child .dot {
+    background: var(--ink);
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5.5px var(--ink);
+  }
   .timeline h3 {
     font-family: var(--sans);
     font-size: 1.02rem;
@@ -207,9 +217,9 @@ import { FOUNDED_YEAR, timeline } from '../../data/site';
     color: var(--muted);
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1240px) {
     .timeline {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       row-gap: 3rem;
     }
     .timeline::before {

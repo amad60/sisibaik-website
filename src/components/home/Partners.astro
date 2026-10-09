@@ -1,0 +1,257 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '../Icon.astro';
+import { brandImg } from '../../lib/images';
+import { partners, partnersTextOnly, collaborators, site } from '../../data/site';
+
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Kolaborasi Mitra Kebaikan')}`;
+---
+<section class="section partners" id="mitra" aria-labelledby="partners-title">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-reveal><span class="num">06</span> Mitra Kebaikan</p>
+      <h2 id="partners-title" class="h1" data-reveal style="--d:.08s">
+        Kebaikan layak <span class="ital accent">dikerjakan bersama.</span>
+      </h2>
+      <p class="lede" data-reveal style="--d:.14s">
+        Mitra Kebaikan adalah wadah kolaborasi bagi perusahaan, komunitas, dan individu untuk menciptakan kesetaraan pendidikan dan kesempatan meraih mimpi bagi generasi berikutnya.
+      </p>
+    </div>
+
+    <ul class="logos">
+      {partners.map((p, i) => (
+        <li data-reveal style={`--d:${i * 0.07}s`}>
+          <a href={p.href} target="_blank" rel="noopener">
+            <span class="logo"><Image src={brandImg(p.logo)} alt={p.name} height={88} width={Math.round(88 * brandImg(p.logo).width / brandImg(p.logo).height)} /></span>
+            <span class="name">{p.name} <Icon name="arrow-up-right" /></span>
+            <span class="note">{p.note}</span>
+          </a>
+        </li>
+      ))}
+      {partnersTextOnly.map((name, i) => (
+        <li class="text" data-reveal style={`--d:${(partners.length + i) * 0.07}s`}>
+          <div>
+            <span class="logo word">{name}</span>
+            <span class="name">{name}</span>
+            <span class="note">Badan Usaha Mitra Kebaikan.</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="kind" data-reveal>
+      <h3>Kindlaborators</h3>
+      <p>Komunitas dan lembaga yang pernah berkolaborasi bersama kami, ditambah seluruh Warga Negara Republik Kebaikan.</p>
+      <ul class="chips">
+        {collaborators.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+
+    <div class="join" data-reveal>
+      <div>
+        <h3 class="h2">Ingin menjadi <span class="ital">Mitra Kebaikan?</span></h3>
+        <p>Kami terbuka untuk dukungan program pendidikan, kemitraan sosial, kolaborasi komunitas, dan kerja profesional di bidang komunikasi, kreatif, serta social campaign.</p>
+      </div>
+      <div class="join-ctas">
+        <a class="btn btn--sun" href={mail}>Kirim email <Icon name="mail" class="arrow" /></a>
+        <a class="btn btn--light" href={site.docs.companyProfile} target="_blank" rel="noopener">Company profile <Icon name="download" class="arrow" /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .head {
+    max-width: 920px;
+  }
+  .head .lede {
+    margin-top: 1.5rem;
+    max-width: 54ch;
+  }
+  .logos {
+    list-style: none;
+    margin: clamp(3rem, 6vw, 4.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .logos a,
+  .logos .text > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1.2rem 1.2rem 1.4rem;
+    border-radius: var(--radius-md);
+    background: #fffaf2;
+    box-shadow: 0 0 0 1px var(--line);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  }
+  .logos a:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px var(--line), 0 24px 40px -26px rgb(20 27 61 / 0.45);
+  }
+  .logo {
+    display: grid;
+    place-items: center;
+    height: 132px;
+    margin-bottom: 0.6rem;
+    border-radius: 14px;
+    background: #fff;
+  }
+  .logo :global(img) {
+    max-height: 84px;
+    max-width: 80%;
+    width: auto;
+    object-fit: contain;
+  }
+  .word {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    text-align: center;
+    padding: 0 1rem;
+    color: var(--blue);
+  }
+  .name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+  .name :global(svg) {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex: none;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .kind {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 0.32fr) minmax(0, 0.68fr);
+    gap: 0.6rem 3rem;
+  }
+  .kind h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.8rem;
+  }
+  .kind p {
+    grid-column: 1;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .chips {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chips li {
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgb(20 27 61 / 0.22);
+    font-size: 0.9rem;
+    transition: background 0.3s, color 0.3s;
+  }
+  .chips li:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .join {
+    margin-top: clamp(4rem, 8vw, 6rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: clamp(2rem, 4vw, 3.2rem);
+    border-radius: var(--radius-lg);
+    background: var(--blue);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .join::after {
+    content: '';
+    position: absolute;
+    right: -80px;
+    top: -120px;
+    width: 300px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--sun);
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  .join > * {
+    position: relative;
+    z-index: 1;
+  }
+  .join h3 {
+    color: var(--paper);
+    max-width: 16ch;
+  }
+  .join p {
+    margin: 1rem 0 0;
+    max-width: 56ch;
+    color: rgb(247 240 227 / 0.86);
+  }
+  .join-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 1000px) {
+    .logos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .kind {
+      grid-template-columns: 1fr;
+    }
+    .chips {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 0.8rem;
+    }
+  }
+  @media (max-width: 520px) {
+    .logos {
+      gap: 0.7rem;
+    }
+    .logo {
+      height: 96px;
+    }
+    .logos a,
+    .logos .text > div {
+      padding: 0.8rem 0.8rem 1rem;
+    }
+    .note {
+      font-size: 0.84rem;
+    }
+    .word {
+      font-size: 1.15rem;
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import Photo from './Photo.astro';
+
+interface Props {
+  eyebrow: string;
+  lede?: string;
+  photo?: string;
+  photoAlt?: string;
+  caption?: string;
+  position?: string;
+}
+const { eyebrow, lede, photo, photoAlt = '', caption, position } = Astro.props;
+---
+<section class:list={['page-hero', { 'has-photo': photo }]}>
+  <div class="blob" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="copy">
+      <p class="eyebrow" data-reveal>{eyebrow}</p>
+      <h1 class="h1" data-reveal style="--d:.06s"><slot /></h1>
+      {lede && <p class="lede" data-reveal style="--d:.14s">{lede}</p>}
+      <slot name="after" />
+    </div>
+    {photo && (
+      <figure class="pic" data-reveal="mask">
+        <Photo name={photo} alt={photoAlt} eager sizes="(min-width: 1000px) 42vw, 100vw" position={position} />
+        {caption && <figcaption>{caption}</figcaption>}
+      </figure>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: clamp(8rem, 14vw, 11rem) 0 clamp(3rem, 6vw, 5rem);
+    overflow: clip;
+  }
+  .blob {
+    position: absolute;
+    left: -20vw;
+    top: -16vw;
+    width: 60vw;
+    aspect-ratio: 1;
+    max-width: 900px;
+    background: radial-gradient(closest-side, rgb(255 224 160 / 0.8), rgb(255 224 160 / 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .inner {
+    position: relative;
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: end;
+  }
+  .has-photo .inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+  .copy .h1 {
+    max-width: 16ch;
+  }
+  .page-hero:not(.has-photo) .h1 {
+    max-width: 20ch;
+  }
+  .lede {
+    margin: 1.6rem 0 0;
+    max-width: 50ch;
+  }
+  .pic {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 5 / 4;
+    border-radius: var(--radius-lg) 999px var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 40px 80px -40px rgb(20 27 61 / 0.5);
+  }
+  .pic :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  figcaption {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgb(247 240 227 / 0.92);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 900px) {
+    .has-photo .inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

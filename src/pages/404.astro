@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Scribble from '../components/Scribble.astro';
+---
+<Base title="Halaman tidak ditemukan" description="Halaman yang Anda cari tidak tersedia.">
+  <section class="nf">
+    <div class="wrap">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="display">Halaman ini <span class="ital accent">belum</span> <Scribble>ketemu.</Scribble></h1>
+      <p class="lede">Mungkin alamatnya berubah saat situs kami diperbarui. Coba mulai dari beranda atau baca cerita terbaru kami.</p>
+      <div class="ctas">
+        <a class="btn" href="/">Ke beranda <Icon name="arrow" class="arrow" /></a>
+        <a class="btn btn--ghost" href="/stories/">Baca cerita</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    min-height: 82vh;
+    display: grid;
+    align-items: center;
+    padding: 9rem 0 5rem;
+  }
+  .display {
+    max-width: 12ch;
+  }
+  .lede {
+    margin-top: 1.6rem;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2.2rem;
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+import Icon from './Icon.astro';
+import { coverOf, formatDate, slugify, type Story } from '../lib/stories';
+
+interface Props {
+  story: Story;
+  sizes?: string;
+  class?: string;
+  delay?: number;
+}
+
+const { story, sizes = '(min-width: 1000px) 30vw, (min-width: 640px) 45vw, 92vw', class: className, delay = 0 } = Astro.props;
+const cover = coverOf(story);
+---
+<article class:list={['story-card', className]} data-category={slugify(story.category)} data-reveal style={`--d:${delay}s`}>
+  <a href={`/stories/${story.slug}/`} class="hit">
+    <div class="thumb">
+      {cover && (
+        <img src={cover.src} srcset={cover.srcset} sizes={sizes} width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" />
+      )}
+      <span class="cat">{story.category}</span>
+    </div>
+    <div class="meta">
+      <time datetime={story.date}>{formatDate(story.date)}</time>
+      <h3>{story.title}</h3>
+      <p>{story.excerpt}</p>
+      <span class="more">Baca cerita <Icon name="arrow-up-right" /></span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .story-card {
+    min-width: 0;
+  }
+  .hit {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  .thumb {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--paper-3);
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.94);
+    transition: transform 1.2s var(--ease-out), filter 0.6s;
+  }
+  .hit:hover .thumb img {
+    transform: scale(1.05);
+    filter: saturate(1.05);
+  }
+  .cat {
+    position: absolute;
+    left: 0.8rem;
+    top: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgb(247 240 227 / 0.92);
+    backdrop-filter: blur(6px);
+    font-size: 0.74rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1.1rem 0.2rem 0;
+    flex: 1;
+  }
+  time {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.45rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    background: linear-gradient(var(--sun), var(--sun)) 0 92% / 0 0.35em no-repeat;
+    transition: background-size 0.6s var(--ease-out);
+  }
+  .hit:hover h3 {
+    background-size: 100% 0.35em;
+  }
+  p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .more :global(svg) {
+    width: 0.95rem;
+    height: 0.95rem;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .hit:hover .more :global(svg) {
+    transform: translate(3px, -3px);
+  }
+</style>

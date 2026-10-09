@@ -1,0 +1,252 @@
+---
+import Photo from '../Photo.astro';
+import Icon from '../Icon.astro';
+import StoryCard from '../StoryCard.astro';
+import { getStory, formatDate } from '../../lib/stories';
+
+const featured = getStory('lulus-ibm-2025-2026')!;
+const picks = [
+  'indonesia-bisa-membaca-menghadirkan-guest-tutor-week',
+  'berkat-patungan-spp-alma-bisa-ikut-ujian',
+  'sisi-baik-gelar-workshop-perfilman',
+].map((slug) => getStory(slug)!);
+---
+<section class="section stories" id="cerita" aria-labelledby="stories-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-reveal><span class="num">04</span> Cerita Baik</p>
+        <h2 id="stories-title" class="h1" data-reveal style="--d:.08s">
+          Kabar dari kelas, sekolah, dan <span class="ital accent">Warga Baik.</span>
+        </h2>
+      </div>
+      <a class="btn btn--ghost" href="/stories/" data-reveal style="--d:.14s">Semua cerita <Icon name="arrow" class="arrow" /></a>
+    </div>
+
+    <div class="top">
+      <article class="feature" data-reveal="scale">
+        <a href={`/stories/${featured.slug}/`}>
+          <div class="frame shot">
+            <Photo name="pelepasan-2026-bersama" alt="Siswa Indonesia Bisa Membaca, orang tua, dan para guru berfoto bersama di hari pelepasan Mei 2026" sizes="(min-width: 1000px) 58vw, 100vw" />
+          </div>
+          <div class="overlay">
+            <span class="pill">Terbaru &middot; {featured.category}</span>
+            <h3 class="h2">{featured.title}</h3>
+            <p>{featured.excerpt}</p>
+            <span class="go"><time datetime={featured.date}>{formatDate(featured.date)}</time> <Icon name="arrow-up-right" /></span>
+          </div>
+        </a>
+      </article>
+
+      <figure class="voice" data-reveal style="--d:.12s">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>
+          <p>Terima kasih Warga Baik yang sudah membantu saya meringankan tunggakan sehingga saya bisa lebih semangat belajar.</p>
+        </blockquote>
+        <figcaption>
+          <span class="avatar"><Photo name="nazwa" alt="" sizes="64px" widths={[128]} position="58% 30%" /></span>
+          <span><strong>Nazwa</strong><br />Penerima Patungan SPP, 2025</span>
+        </figcaption>
+        <a class="link-arrow" href="/stories/kejar-mimpi-jadi-reporter-nazwa-raih-bantuan-patungan-spp/">Kisah Nazwa <Icon name="arrow-up-right" /></a>
+      </figure>
+    </div>
+
+    <div class="grid">
+      {picks.map((s, i) => <StoryCard story={s} delay={i * 0.08} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .head .h1 {
+    max-width: 15ch;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 1.2rem;
+  }
+  .feature a {
+    position: relative;
+    display: block;
+    height: 100%;
+    min-height: 520px;
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .shot {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  .shot :global(img) {
+    position: absolute;
+    inset: 0;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .feature a:hover .shot :global(img) {
+    transform: scale(1.04);
+  }
+  .overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: clamp(1.5rem, 3vw, 2.6rem);
+    padding-top: 8rem;
+    background: linear-gradient(180deg, rgb(20 27 61 / 0), rgb(20 27 61 / 0.62) 38%, rgb(20 27 61 / 0.92));
+    z-index: 2;
+  }
+  .pill {
+    display: inline-flex;
+    padding: 0.42rem 0.8rem;
+    border-radius: 999px;
+    background: var(--sun);
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+  .overlay h3 {
+    margin: 1rem 0 0.6rem;
+    color: var(--paper);
+  }
+  .overlay p {
+    margin: 0 0 1.2rem;
+    max-width: 52ch;
+    color: rgb(247 240 227 / 0.88);
+  }
+  .go {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .go :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .feature a:hover .go :global(svg) {
+    transform: translate(3px, -3px);
+  }
+
+  .voice {
+    position: relative;
+    margin: 0;
+    padding: clamp(1.8rem, 3vw, 2.6rem);
+    border-radius: var(--radius-lg);
+    background: var(--sun-soft);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .voice::after {
+    content: '';
+    position: absolute;
+    right: -30%;
+    bottom: -30%;
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(252 168 24 / 0.35);
+    pointer-events: none;
+  }
+  .mark {
+    font-family: var(--serif);
+    font-size: 8rem;
+    line-height: 0.7;
+    height: 3.6rem;
+    color: var(--sun-deep);
+  }
+  .voice blockquote {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .voice blockquote p {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-weight: 380;
+    font-size: clamp(1.45rem, 1.2rem + 0.8vw, 1.95rem);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+  }
+  .voice figcaption {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 2rem 0 1.4rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    line-height: 1.35;
+  }
+  .avatar {
+    flex: none;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 3px var(--paper);
+  }
+  .avatar :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .voice .link-arrow {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (max-width: 1000px) {
+    .top {
+      grid-template-columns: 1fr;
+    }
+    .feature a {
+      min-height: 0;
+      aspect-ratio: 4 / 4.4;
+    }
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin-inline: calc(var(--gutter) * -1);
+      padding: 0 var(--gutter) 0.5rem;
+      scrollbar-width: none;
+    }
+    .grid > :global(*) {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+    }
+    .feature a {
+      aspect-ratio: 3 / 4.2;
+    }
+  }
+</style>

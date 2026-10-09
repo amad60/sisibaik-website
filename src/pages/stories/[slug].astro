@@ -1,0 +1,279 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import StoryCard from '../../components/StoryCard.astro';
+import { stories, coverOf, formatDate, slugify, type Story } from '../../lib/stories';
+import { storyImage, storySrcset } from '../../lib/images';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return stories.map((story) => ({ params: { slug: story.slug }, props: { story } }));
+}
+
+interface Props {
+  story: Story;
+}
+const { story } = Astro.props;
+const cover = coverOf(story);
+const coverRef = `@story/${story.slug}/${story.cover}`;
+
+const body = story.body
+  .replace(new RegExp(`<figure>(?:(?!</figure>).)*${coverRef.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?:(?!</figure>).)*</figure>`, 's'), (m) =>
+    m.includes('<figcaption') ? m : '',
+  )
+  .replace(/<img([^>]*?)src="@story\/([^"]+)"([^>]*?)\/?>/g, (_m, pre: string, ref: string, post: string) => {
+    const [slug, ...rest] = ref.split('/');
+    const img = storyImage(slug, rest.join('/'));
+    if (!img) return '';
+    const { src, srcset } = storySrcset(img);
+    const attrs = `${pre}${post}`.replace(/\s(width|height|loading|decoding|srcset|sizes)="[^"]*"/g, '');
+    return `<img${attrs} src="${src}"${srcset ? ` srcset="${srcset}" sizes="(min-width: 900px) 760px, 92vw"` : ''} width="${img.width}" height="${img.height}" loading="lazy" decoding="async">`;
+  });
+
+const related = [
+  ...stories.filter((s) => s.slug !== story.slug && s.category === story.category),
+  ...stories.filter((s) => s.slug !== story.slug && s.category !== story.category),
+].slice(0, 3);
+
+const ogImage = cover ? `/og/stories/${story.slug}.jpg` : undefined;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: story.title,
+  datePublished: story.date,
+  description: story.excerpt,
+  image: ogImage ? [new URL(ogImage, Astro.site).href] : undefined,
+  author: { '@type': 'Organization', name: site.name, url: site.url },
+  publisher: { '@type': 'Organization', name: site.legalName, logo: { '@type': 'ImageObject', url: new URL('/icon-512.png', Astro.site).href } },
+  mainEntityOfPage: new URL(`/stories/${story.slug}/`, Astro.site).href,
+};
+---
+<Base title={story.title} description={story.excerpt} image={ogImage} type="article" published={story.date} jsonLd={jsonLd}>
+  <article class="story">
+    <header class="wrap head">
+      <a class="back" href="/stories/" data-reveal><Icon name="arrow" /> Semua cerita</a>
+      <div class="meta" data-reveal style="--d:.04s">
+        <a class="pill" href={`/stories/?kategori=${slugify(story.category)}`}>{story.category}</a>
+        <time datetime={story.date}>{formatDate(story.date)}</time>
+      </div>
+      <h1 class="h1" data-reveal style="--d:.08s">{story.title}</h1>
+      <p class="lede" data-reveal style="--d:.14s">{story.excerpt}</p>
+    </header>
+
+    {cover && (
+      <figure class="wrap cover" data-reveal="mask">
+        <img src={cover.src} srcset={cover.srcset} sizes="(min-width: 1320px) 1240px, 94vw" width={cover.width} height={cover.height} alt="" fetchpriority="high" decoding="async" />
+      </figure>
+    )}
+
+    <div class="wrap body-wrap">
+      <div class="prose" set:html={body} />
+      <aside class="aside">
+        <div class="aside-card">
+          <p class="k">Ikut bergerak</p>
+          <p>Cerita seperti ini terjadi karena Warga Baik. Bantu kami menjaga ruang belajar tetap hidup.</p>
+          <a class="btn btn--sun btn--small" href="/do-donate/">Jadi Warga Baik <Icon name="arrow" class="arrow" /></a>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <section class="section more" aria-labelledby="more-title">
+    <div class="wrap">
+      <h2 id="more-title" class="h2">Cerita <span class="ital accent">lainnya</span></h2>
+      <div class="grid">
+        {related.map((s, i) => <StoryCard story={s} delay={i * 0.06} />)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-top: clamp(7.5rem, 13vw, 10rem);
+    max-width: calc(980px + var(--gutter) * 2);
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    color: var(--muted);
+  }
+  .back :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    rotate: 180deg;
+    transition: translate 0.4s var(--ease-out);
+  }
+  .back:hover :global(svg) {
+    translate: -4px 0;
+  }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0 1.4rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .pill {
+    padding: 0.42rem 0.85rem;
+    border-radius: 999px;
+    background: var(--sun);
+    color: var(--ink);
+    font-weight: 650;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+  .head .h1 {
+    font-size: clamp(2.2rem, 1.4rem + 3.4vw, 4.6rem);
+    line-height: 1.02;
+  }
+  .head .lede {
+    margin-top: 1.5rem;
+    max-width: 56ch;
+  }
+  .cover {
+    margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  }
+  .cover img {
+    width: 100%;
+    max-height: 78vh;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+  .body-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 760px) minmax(0, 280px);
+    justify-content: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .prose {
+    font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
+    line-height: 1.75;
+    color: var(--ink-2);
+  }
+  .prose :global(p) {
+    margin: 0 0 1.4em;
+  }
+  .prose > :global(p:first-child::first-letter) {
+    float: left;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 4.4em;
+    line-height: 0.8;
+    padding: 0.08em 0.12em 0 0;
+    color: var(--blue);
+  }
+  .prose :global(h2),
+  .prose :global(h3) {
+    margin: 2.2em 0 0.7em;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .prose :global(h2) {
+    font-size: 1.9rem;
+  }
+  .prose :global(h3) {
+    font-size: 1.5rem;
+  }
+  .prose :global(a) {
+    color: var(--blue);
+    text-underline-offset: 3px;
+  }
+  .prose :global(figure) {
+    margin: 2.4em 0;
+  }
+  .prose :global(figure img) {
+    width: 100%;
+    border-radius: var(--radius-md);
+    background: var(--paper-3);
+  }
+  .prose :global(figcaption) {
+    margin-top: 0.7rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .prose :global(blockquote) {
+    margin: 2em 0;
+    padding: 0.4em 0 0.4em 1.4em;
+    border-left: 3px solid var(--sun);
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.25em;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .prose :global(ul) {
+    margin: 0 0 1.4em;
+    padding-left: 1.2em;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.4em;
+  }
+  .prose :global(strong),
+  .prose :global(b) {
+    color: var(--ink);
+  }
+  .aside-card {
+    position: sticky;
+    top: 110px;
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper-2);
+  }
+  .k {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sun-deep);
+  }
+  .aside-card p:not(.k) {
+    margin: 0.6rem 0 1.2rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .more {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    background: var(--paper-2);
+    border-radius: clamp(28px, 5vw, 64px) clamp(28px, 5vw, 64px) 0 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+    margin-top: 2.4rem;
+  }
+  @media (max-width: 1000px) {
+    .body-wrap {
+      grid-template-columns: 1fr;
+    }
+    .aside-card {
+      position: static;
+    }
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .cover {
+      padding-inline: 0.6rem;
+    }
+  }
+</style>

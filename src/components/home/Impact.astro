@@ -1,13 +1,13 @@
 ---
 import Photo from '../Photo.astro';
 import Icon from '../Icon.astro';
-import { site } from '../../data/site';
+import { site, impact } from '../../data/site';
 
 const stats = [
-  { value: 0, prefix: 'Rp', suffix: '', label: 'biaya sekolah di Indonesia Bisa Membaca. Perlengkapan belajar pun disediakan.' },
-  { value: 30, prefix: '', suffix: '+', label: 'tahun Ibu Tien mengajar secara sukarela, tanpa menarik biaya sepeser pun.' },
-  { value: 28, prefix: '', suffix: '', label: 'siswa belajar bersama di kelas Indonesia Bisa Membaca tahun ajaran 2025-2026.' },
-  { value: 19, prefix: '', suffix: '', label: 'siswa lulus pada Mei 2026 dan melanjutkan ke jenjang pendidikan berikutnya.' },
+  { value: impact.ibmStudents, prefix: '', suffix: '', label: 'siswa terlayani kelas Indonesia Bisa Membaca dalam dua tahun ajaran, 2024-2025 dan 2025-2026.' },
+  { value: impact.sppRecipients, prefix: '', suffix: '', label: `siswa terbantu Patungan SPP melalui ${impact.sppPayments} kali pembayaran tunggakan sekolah.` },
+  { value: 16, prefix: 'Rp', suffix: 'jt', label: `total bantuan Patungan SPP yang tersalurkan, tepatnya ${impact.sppTotal}.` },
+  { value: impact.oporRecipients2025, prefix: '', suffix: '', label: `penerima Patungan Opor pada Idul Fitri 2025, naik dari ${impact.oporRecipients2024} penerima di tahun sebelumnya.` },
 ];
 ---
 <section class="section impact" id="dampak" aria-labelledby="impact-title">
@@ -27,6 +27,7 @@ const stats = [
         </li>
       ))}
     </ul>
+    <p class="source" data-reveal>Sumber: Impact Report Sisi Baik 2024-2025.</p>
 
     <div class="report">
       <figure class="frame grad" data-reveal="mask">
@@ -35,7 +36,7 @@ const stats = [
       <div class="report-card" data-reveal style="--d:.2s">
         <span class="kicker">Laporan terbaru</span>
         <h3 class="h3">Impact Report 2024-2025</h3>
-        <p>Rangkuman perjalanan Indonesia Bisa Membaca, Patungan SPP, dan gerakan Sisi Baik lainnya sepanjang tahun.</p>
+        <p>Dua tahun pertama Yayasan Sisi Baik Manusia: capaian Indonesia Bisa Membaca, Patungan SPP, Patungan Opor, laporan keuangan, dan rencana 2026.</p>
         <a class="btn btn--sun" href={site.docs.impactReport} target="_blank" rel="noopener">
           Unduh laporan (PDF) <Icon name="download" class="arrow" />
         </a>
@@ -116,6 +117,11 @@ const stats = [
     max-width: 28ch;
   }
 
+  .source {
+    margin: 2.6rem 0 0;
+    font-size: 0.84rem;
+    color: rgb(247 240 227 / 0.6);
+  }
   .report {
     position: relative;
     margin-top: clamp(4rem, 8vw, 7rem);

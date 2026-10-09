@@ -10,7 +10,7 @@ export const pembina: Person[] = [
     name: 'Tien Suryantini',
     role: 'Dewan Pembina, pendiri Edukasi Dasar',
     photo: 'tien',
-    bio: 'Pendiri sekolah calistung gratis di sudut Kota Depok yang kemudian resmi menjadi LSM Edukasi Dasar dan memberi akses pendidikan dasar bagi ratusan anak. Ia juga mengusahakan anak-anak putus sekolah mendapat ijazah lewat jalur PKBM untuk kejar Paket A, B, dan C. Kini Bu Tien menjadi pembina Kelas Indonesia Bisa Membaca.',
+    bio: 'Pendiri sekolah calistung gratis di sudut Kota Depok yang kemudian resmi menjadi LSM Edukasi Dasar dan memberi akses pendidikan dasar bagi ratusan anak. Beliau juga mengusahakan anak-anak putus sekolah mendapat ijazah lewat jalur PKBM untuk kejar Paket A, B, dan C. Bu Tien membina dan kembali mengajar di Kelas Indonesia Bisa Membaca, hingga berpulang pada 2026.',
   },
   {
     name: 'Nestor Rico Tambun',

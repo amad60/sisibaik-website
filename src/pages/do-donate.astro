@@ -1,0 +1,243 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import DonateCard from '../components/DonateCard.astro';
+import Allocation from '../components/Allocation.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import { site, impact } from '../data/site';
+
+const wa = (text: string) => `${site.whatsapp}?text=${encodeURIComponent(text)}`;
+const funds = [
+  {
+    title: 'Biaya operasional kelas Indonesia Bisa Membaca',
+    body: `Makan bersama, alat tulis, honor guru pembantu, listrik, dan kebersihan kelas. Kebutuhannya ${impact.ibmYearlyCost} per tahun.`,
+    photo: 'budi-pekerti',
+    alt: 'Siswa Indonesia Bisa Membaca di kelas',
+  },
+  {
+    title: 'Patungan SPP',
+    body: 'Pelunasan tunggakan sekolah agar siswa bisa ikut ujian, naik kelas, dan mengambil ijazahnya.',
+    photo: 'alma',
+    alt: 'Alma, penerima Patungan SPP',
+  },
+  {
+    title: 'Patungan Opor',
+    body: 'Hidangan Idul Fitri bagi pekerja harian tanpa THR, perantau di kosan, dan warga yang sering terlupakan.',
+    photo: 'patungan-opor',
+    alt: 'Poster Patungan Opor',
+  },
+];
+const steps = [
+  'Transfer ke rekening Yayasan Sisi Baik Manusia atau pindai QRIS.',
+  'Simpan bukti transfer Anda.',
+  'Kirim bukti transfer lewat WhatsApp dan sebutkan program yang ingin Anda dukung.',
+];
+---
+<Base title="Do & Donate" description="Cara ikut bergerak bersama Sisi Baik Project: donasi untuk Indonesia Bisa Membaca, Patungan SPP, dan Patungan Opor, menjadi relawan pengajar, belanja di Toko Sisi Baik, atau kemitraan perusahaan.">
+  <PageHero
+    eyebrow="Do & Donate"
+    lede="Ada banyak cara menjadi Warga Baik. Berdonasi, meluangkan waktu untuk mengajar, berbelanja di Toko Sisi Baik, atau mengajak perusahaan Anda menjadi Mitra Kebaikan."
+    photo="pelepasan-2026-tawa"
+    photoAlt="Siswa Indonesia Bisa Membaca tertawa bersama di hari pelepasan Mei 2026"
+    caption="Pelepasan IBM, Mei 2026"
+  >
+    Kebaikan kecil, <span class="ital accent">peluang</span> yang besar.
+  </PageHero>
+
+  <section class="section give" id="donasi" aria-labelledby="give-title">
+    <div class="wrap">
+      <div class="give-grid">
+        <div>
+          <p class="eyebrow" data-reveal>Donasi</p>
+          <h2 id="give-title" class="h2" data-reveal style="--d:.06s">Salurkan donasi Anda dalam tiga langkah.</h2>
+          <ol class="steps" data-reveal style="--d:.1s">
+            {steps.map((s, i) => <li><span>{i + 1}</span><p>{s}</p></li>)}
+          </ol>
+          <p class="mail">Untuk pertanyaan lain, kirim email ke <a href={`mailto:${site.email}`}>{site.email}</a> atau hubungi <a href={site.whatsapp} target="_blank" rel="noopener">{site.phoneDisplay}</a>.</p>
+        </div>
+        <div class="cards" data-reveal style="--d:.12s">
+          <DonateCard />
+          <Allocation />
+        </div>
+      </div>
+
+      <h3 class="sub" data-reveal>Donasi Anda menopang</h3>
+      <ul class="funds">
+        {funds.map((f, i) => (
+          <li data-reveal style={`--d:${i * 0.07}s`}>
+            <div class="frame"><Photo name={f.photo} alt={f.alt} sizes="(min-width: 900px) 30vw, 92vw" widths={[420, 720, 1000]} /></div>
+            <h4>{f.title}</h4>
+            <p>{f.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section do" id="do" aria-labelledby="do-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Do</p>
+      <h2 id="do-title" class="h2" data-reveal style="--d:.06s">Selain donasi, Anda juga bisa <span class="ital accent">ikut turun tangan.</span></h2>
+      <div class="do-grid">
+        <article data-reveal>
+          <span class="no">01</span>
+          <h3>Relawan pengajar</h3>
+          <p>Bantu anak-anak Indonesia Bisa Membaca belajar baca, tulis, dan hitung di kelas Ratu Jaya, Depok.</p>
+          <a class="btn btn--small" href={wa('Halo Sisi Baik, saya ingin menjadi relawan pengajar Indonesia Bisa Membaca.')} target="_blank" rel="noopener"><Icon name="whatsapp" class="arrow" /> Daftar relawan</a>
+        </article>
+        <article data-reveal style="--d:.07s">
+          <span class="no">02</span>
+          <h3>Toko Sisi Baik</h3>
+          <p>Belanja produk Sisi Baik, termasuk kaos &ldquo;Pernah Nunggak SPP&rdquo; yang hasilnya ikut mendanai Patungan SPP.</p>
+          <a class="btn btn--small" href={site.store} target="_blank" rel="noopener">Buka Tokopedia <Icon name="arrow-up-right" class="arrow" /></a>
+        </article>
+        <article data-reveal style="--d:.14s">
+          <span class="no">03</span>
+          <h3>Corporate partnership</h3>
+          <p>Ajak perusahaan Anda menjadi Mitra Kebaikan dan mendukung program pendidikan secara berkelanjutan.</p>
+          <a class="btn btn--small" href={`mailto:${site.email}?subject=${encodeURIComponent('Corporate Partnership Sisi Baik')}`}><Icon name="mail" class="arrow" /> Hubungi kami</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .give-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .give-grid .h2 {
+    max-width: 14ch;
+  }
+  .steps {
+    list-style: none;
+    margin: 2.2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .steps li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .steps span {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--sun);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+  }
+  .steps p {
+    margin: 0.35rem 0 0;
+    color: var(--ink-2);
+  }
+  .mail {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .mail a {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .cards {
+    display: grid;
+    gap: 1.2rem;
+  }
+  .sub {
+    margin: clamp(4rem, 8vw, 6rem) 0 1.6rem;
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .funds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+  }
+  .funds .frame {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+  }
+  .funds :global(img) {
+    position: absolute;
+    inset: 0;
+  }
+  .funds h4 {
+    margin: 1.1rem 0 0.4rem;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.45rem;
+    line-height: 1.15;
+  }
+  .funds p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .do {
+    background: var(--paper-2);
+    border-radius: clamp(28px, 5vw, 64px) clamp(28px, 5vw, 64px) 0 0;
+  }
+  .do .h2 {
+    max-width: 18ch;
+  }
+  .do-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .do-grid article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+  }
+  .no {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--blue);
+  }
+  .do-grid h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.7rem;
+  }
+  .do-grid p {
+    margin: 0 0 1rem;
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .do-grid .btn {
+    align-self: flex-start;
+  }
+  @media (max-width: 960px) {
+    .give-grid,
+    .funds,
+    .do-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

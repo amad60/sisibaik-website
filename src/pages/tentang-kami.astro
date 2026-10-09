@@ -1,0 +1,496 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import { FOUNDED_YEAR, site, timeline } from '../data/site';
+import { pembina, tim } from '../data/team';
+import { teamImg } from '../lib/images';
+
+const misi = [
+  'Menyediakan akses edukasi bagi masyarakat tidak mampu dan berketerbatasan untuk meningkatkan pengetahuan, keterampilan, dan potensi mereka.',
+  'Menggalang kemampuan dan potensi masyarakat serta pihak lain untuk berkolaborasi dengan menciptakan dampak positif yang lebih besar dalam masyarakat.',
+];
+const tien = pembina.find((p) => p.photo === 'tien')!;
+---
+<Base title="Tentang Kami" description="Kisah Yayasan Sisi Baik Manusia: warisan sekolah calistung gratis Ibu Tien Suryantini dan gerakan kemanusiaan Sisi Baik yang kini berjalan bersama untuk pendidikan yang setara.">
+  <PageHero
+    eyebrow="Tentang Kami"
+    lede="Sekolah calistung gratis yang dirintis Ibu Tien Suryantini, dan gerakan kemanusiaan Sisi Baik yang lahir di masa pandemi. Sejak 2024, keduanya berjalan bersama di bawah Yayasan Sisi Baik Manusia."
+    photo="ibm-kelas-2024"
+    photoAlt="Siswa Indonesia Bisa Membaca belajar bersama di kelas pada tahun pertama, 2024"
+    caption="Kelas Indonesia Bisa Membaca, 2024"
+  >
+    Dua jalan baik yang akhirnya <span class="ital accent">bertemu.</span>
+  </PageHero>
+
+  <section class="section paths" aria-label="Asal-usul">
+    <div class="wrap grid">
+      <article data-reveal>
+        <span class="tag">Jalan pertama</span>
+        <h2 class="h2">Edukasi Dasar</h2>
+        <p>Sejak {FOUNDED_YEAR}, Ibu Tien Suryantini, seorang ibu rumah tangga, mengajar baca, tulis, dan hitung secara gratis kepada anak-anak usia TK dan SD di sekitar rumahnya yang belum punya kesempatan mendapatkan pendidikan awal.</p>
+        <p>Pada 2005, dibantu beberapa mahasiswa Universitas Indonesia, kelas itu resmi menjadi LSM Edukasi Dasar. Perlahan ia memiliki guru bantu, ruang belajar sendiri di tanah sekitar 200 meter persegi, hingga kegiatan seperti belajar angklung. Perjalanan itu bertahan sampai 2020, ketika pandemi dan kesehatan Bu Tien yang menurun membuat kelas harus ditutup.</p>
+      </article>
+      <article data-reveal style="--d:.1s">
+        <span class="tag tag--blue">Jalan kedua</span>
+        <h2 class="h2">Sisi Baik</h2>
+        <p>Sisi Baik lahir pada 2020 sebagai respons kemanusiaan terhadap pandemi. Gerakan pertamanya, Beli dan Bagikan, membeli 1.000 porsi dagangan dari 7 Ibu Kantin yang kehilangan pemasukan, untuk dibagikan kepada pekerja yang masih harus bekerja di jalanan.</p>
+        <p>Menjalankan Sisi Baik sambil bekerja sebagai karyawan ternyata tidak mudah. Pada 2024, tim inti memutuskan meninggalkan pekerjaan masing-masing dan bergerak penuh waktu, memanfaatkan empati lewat kemampuan profesional di bidang komunikasi, kreativitas, dan media.</p>
+      </article>
+      <p class="meet" data-reveal>
+        Hal pertama yang kami lakukan sebagai Yayasan Sisi Baik Manusia adalah menghidupkan kembali sekolah Bu Tien, dengan nama baru: <strong>Indonesia Bisa Membaca.</strong>
+      </p>
+    </div>
+  </section>
+
+  <section class="section tribute" id="ibu-tien" aria-labelledby="tribute-title">
+    <div class="wrap grid">
+      <div class="portrait" data-reveal="scale">
+        <span class="sun" aria-hidden="true"></span>
+        <Image src={teamImg('tien')} alt="Potret Ibu Tien Suryantini" width={520} class="face" />
+      </div>
+      <div class="words">
+        <p class="eyebrow light" data-reveal>Mengenang</p>
+        <h2 id="tribute-title" class="h1" data-reveal style="--d:.06s">Ibu Tien <span class="ital">Suryantini</span></h2>
+        <p class="big" data-reveal style="--d:.12s">{tien.bio}</p>
+        <p data-reveal style="--d:.18s">
+          Sepeninggal beliau, Indonesia Bisa Membaca tetap berjalan berbekal buku tulis mengajar yang beliau susun selama satu tahun terakhir. Dari situ kami belajar bahwa kelas ini bukan hanya layak dipertahankan, tetapi mulai siap dikembangkan sebagai model belajar yang bisa diterapkan di tempat lain.
+        </p>
+        <blockquote data-reveal style="--d:.24s">
+          &ldquo;Anak-anak harus rajin belajar agar menjadi orang yang berguna. Jangan hanya bermain game. Gunakan waktu dengan baik. Kalian juga harus sayang orang tua.&rdquo;
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section vm" aria-labelledby="visi-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Visi</p>
+      <h2 id="visi-title" class="h2 visi" data-reveal style="--d:.06s">
+        Menjadi agen perubahan dalam menciptakan masyarakat <span class="ital accent">inklusif</span> yang memiliki kesempatan pendidikan yang sama dan berkualitas, serta mendorong pemberdayaan melalui aksesibilitas.
+      </h2>
+      <div class="misi">
+        <p class="eyebrow" data-reveal>Misi</p>
+        <ol>
+          {misi.map((m, i) => (
+            <li data-reveal style={`--d:${i * 0.08}s`}><span>{String(i + 1).padStart(2, '0')}</span><p>{m}</p></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section journey" aria-labelledby="journey-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Perjalanan</p>
+      <h2 id="journey-title" class="h2" data-reveal style="--d:.06s">Dari teras rumah ke <span class="ital accent">sebuah yayasan.</span></h2>
+      <ol class="steps">
+        {timeline.map((t) => (
+          <li data-reveal>
+            <span class="year">{t.year}</span>
+            <div>
+              <h3>{t.title}</h3>
+              <p>{t.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section people" id="tim" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="people-head">
+        <div>
+          <p class="eyebrow" data-reveal>Orang-orang di balik Sisi Baik</p>
+          <h2 id="team-title" class="h2" data-reveal style="--d:.06s">Sekelompok orang yang tidak lagi terlalu muda, dengan <span class="ital accent">empati yang besar.</span></h2>
+        </div>
+      </div>
+
+      <h3 class="group" data-reveal>Dewan Pembina</h3>
+      <ul class="board">
+        {pembina.map((p) => (
+          <li data-reveal>
+            <Image src={teamImg(p.photo)} alt={`Foto ${p.name}`} width={240} class="avatar" />
+            <div>
+              <h4>{p.name}</h4>
+              <p class="role">{p.role}</p>
+              <p>{p.bio}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h3 class="group" data-reveal>Tim Kerja Baik</h3>
+      <ul class="crew">
+        {tim.map((p, i) => (
+          <li data-reveal style={`--d:${(i % 4) * 0.06}s`}>
+            <div class="ph"><Image src={teamImg(p.photo)} alt={`Foto ${p.name}`} width={360} /></div>
+            <h4>{p.name}</h4>
+            <p class="role">{p.role}</p>
+            <p>{p.bio}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap">
+      <div class="band" data-reveal>
+        <h2 class="h2">Kenali kami lebih dalam.</h2>
+        <div class="ctas">
+          <a class="btn btn--sun" href={site.docs.companyProfile} target="_blank" rel="noopener">Company profile (PDF) <Icon name="download" class="arrow" /></a>
+          <a class="btn btn--light" href={site.docs.impactReport} target="_blank" rel="noopener">Impact Report 2024-2025 <Icon name="download" class="arrow" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .paths {
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+  .paths .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+  .paths article {
+    padding-top: 1.6rem;
+    border-top: 1.5px solid var(--ink);
+  }
+  .paths h2 {
+    margin: 1rem 0 1.2rem;
+  }
+  .paths p {
+    color: var(--ink-2);
+    max-width: 56ch;
+  }
+  .tag {
+    display: inline-flex;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: var(--sun);
+    font-size: 0.8rem;
+    font-weight: 650;
+  }
+  .tag--blue {
+    background: var(--blue);
+    color: var(--paper);
+  }
+  .meet {
+    grid-column: 1 / -1;
+    margin: 1rem 0 0;
+    max-width: 30ch;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  .meet strong {
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    color: var(--blue);
+  }
+
+  .tribute {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: clamp(28px, 5vw, 64px);
+    margin-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+  .tribute .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+  }
+  .portrait {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 460px;
+  }
+  .sun {
+    position: absolute;
+    inset: 8% -6% -6% 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffd06a, var(--sun) 60%, #f29a0a);
+  }
+  .portrait :global(.face) {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    filter: grayscale(0.25) sepia(0.15);
+  }
+  .light {
+    color: rgb(247 240 227 / 0.8);
+  }
+  .tribute h2 {
+    color: var(--paper);
+  }
+  .tribute .ital {
+    color: var(--sun);
+  }
+  .words p {
+    color: rgb(247 240 227 / 0.84);
+    max-width: 58ch;
+  }
+  .words .big {
+    margin-top: 1.6rem;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--paper);
+  }
+  .words blockquote {
+    margin: 2rem 0 0;
+    padding-left: 1.4rem;
+    border-left: 3px solid var(--sun);
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    max-width: 48ch;
+  }
+
+  .visi {
+    max-width: 24ch;
+    font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.6rem);
+    line-height: 1.1;
+  }
+  .misi {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .misi ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  .misi li {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.8rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper-2);
+  }
+  .misi span {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--blue);
+  }
+  .misi p {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--ink-2);
+  }
+
+  .journey {
+    padding-top: 0;
+  }
+  .journey h2 {
+    max-width: 18ch;
+  }
+  .steps {
+    list-style: none;
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: 0;
+  }
+  .steps li {
+    display: grid;
+    grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr);
+    gap: 1.5rem;
+    padding: 1.8rem 0;
+    border-top: 1px solid var(--line);
+    transition: background 0.4s;
+  }
+  .steps li:hover {
+    background: linear-gradient(90deg, rgb(255 224 160 / 0.4), transparent);
+  }
+  .year {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: clamp(2.4rem, 1.8rem + 2vw, 3.8rem);
+    line-height: 1;
+    color: var(--blue);
+  }
+  .steps h3 {
+    margin: 0.3rem 0 0.4rem;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.5rem;
+  }
+  .steps p {
+    margin: 0;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+
+  .people {
+    background: var(--paper-2);
+    border-radius: clamp(28px, 5vw, 64px) clamp(28px, 5vw, 64px) 0 0;
+  }
+  .people-head h2 {
+    max-width: 22ch;
+  }
+  .group {
+    margin: clamp(3rem, 6vw, 4.5rem) 0 1.4rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .board {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  .board li {
+    display: flex;
+    gap: 1.4rem;
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+  }
+  .board :global(.avatar) {
+    flex: none;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    background: var(--sun-soft);
+  }
+  .people h4 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.4rem;
+    line-height: 1.15;
+  }
+  .role {
+    margin: 0.25rem 0 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    color: var(--sun-deep);
+  }
+  .people li p:not(.role) {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .crew {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.2rem, 2.5vw, 2rem);
+  }
+  .ph {
+    position: relative;
+    aspect-ratio: 1;
+    margin-bottom: 1.1rem;
+    border-radius: 50%;
+    background: var(--paper-3);
+    overflow: hidden;
+    transition: background 0.5s;
+  }
+  .crew li:nth-child(3n + 1) .ph {
+    background: var(--sun-soft);
+  }
+  .crew li:nth-child(3n + 2) .ph {
+    background: var(--blue-soft);
+  }
+  .crew li:nth-child(3n) .ph {
+    background: var(--clay-soft);
+  }
+  .ph :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
+  }
+  .crew li:hover .ph :global(img) {
+    transform: scale(1.05) rotate(-2deg);
+  }
+
+  .cta-band {
+    background: var(--paper-2);
+    padding-top: 0;
+  }
+  .band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: clamp(2rem, 4vw, 3rem);
+    border-radius: var(--radius-lg);
+    background: var(--blue);
+    color: var(--paper);
+  }
+  .band h2 {
+    color: var(--paper);
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 1000px) {
+    .crew {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tribute .grid,
+    .board {
+      grid-template-columns: 1fr;
+    }
+    .portrait {
+      max-width: 320px;
+    }
+  }
+  @media (max-width: 760px) {
+    .paths .grid,
+    .misi ol {
+      grid-template-columns: 1fr;
+    }
+    .steps li {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+    .board li {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 460px) {
+    .crew {
+      gap: 1.6rem 1rem;
+    }
+    .crew h4 {
+      font-size: 1.15rem;
+    }
+  }
+</style>

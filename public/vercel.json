@@ -1,0 +1,291 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/2026/05/26/lulus-ibm-2025-2026/",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/2026/05/26/lulus-ibm-2025-2026",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/2026/05/22/indonesia-bisa-membaca-menghadirkan-guest-tutor-week/",
+      "destination": "/stories/indonesia-bisa-membaca-menghadirkan-guest-tutor-week/",
+      "permanent": true
+    },
+    {
+      "source": "/2026/05/22/indonesia-bisa-membaca-menghadirkan-guest-tutor-week",
+      "destination": "/stories/indonesia-bisa-membaca-menghadirkan-guest-tutor-week/",
+      "permanent": true
+    },
+    {
+      "source": "/2026/01/05/semangat-baru-di-awal-tahun-belajar-membaca-sambil-belajar-bertani-bersama-tanampangan-id/",
+      "destination": "/stories/semangat-baru-di-awal-tahun-belajar-membaca-sambil-belajar-bertani-bersama-tanampangan-id/",
+      "permanent": true
+    },
+    {
+      "source": "/2026/01/05/semangat-baru-di-awal-tahun-belajar-membaca-sambil-belajar-bertani-bersama-tanampangan-id",
+      "destination": "/stories/semangat-baru-di-awal-tahun-belajar-membaca-sambil-belajar-bertani-bersama-tanampangan-id/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/10/29/sisi-baik-gelar-workshop-perfilman/",
+      "destination": "/stories/sisi-baik-gelar-workshop-perfilman/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/10/29/sisi-baik-gelar-workshop-perfilman",
+      "destination": "/stories/sisi-baik-gelar-workshop-perfilman/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/09/22/kejar-mimpi-jadi-reporter-nazwa-raih-bantuan-patungan-spp/",
+      "destination": "/stories/kejar-mimpi-jadi-reporter-nazwa-raih-bantuan-patungan-spp/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/09/22/kejar-mimpi-jadi-reporter-nazwa-raih-bantuan-patungan-spp",
+      "destination": "/stories/kejar-mimpi-jadi-reporter-nazwa-raih-bantuan-patungan-spp/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/09/09/harapan-rado-di-tengah-keterbatasan/",
+      "destination": "/stories/harapan-rado-di-tengah-keterbatasan/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/09/09/harapan-rado-di-tengah-keterbatasan",
+      "destination": "/stories/harapan-rado-di-tengah-keterbatasan/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/07/15/berkat-patungan-spp-alma-bisa-ikut-ujian/",
+      "destination": "/stories/berkat-patungan-spp-alma-bisa-ikut-ujian/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/07/15/berkat-patungan-spp-alma-bisa-ikut-ujian",
+      "destination": "/stories/berkat-patungan-spp-alma-bisa-ikut-ujian/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/07/07/rssg-a-la-bu-tien-dimulai-lagi/",
+      "destination": "/stories/rssg-a-la-bu-tien-dimulai-lagi/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/07/07/rssg-a-la-bu-tien-dimulai-lagi",
+      "destination": "/stories/rssg-a-la-bu-tien-dimulai-lagi/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/17/lurah-ratu-jaya-apresiasi-sisi-baik-project/",
+      "destination": "/stories/lurah-ratu-jaya-apresiasi-sisi-baik-project/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/17/lurah-ratu-jaya-apresiasi-sisi-baik-project",
+      "destination": "/stories/lurah-ratu-jaya-apresiasi-sisi-baik-project/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/16/indonesia-bisa-membaca-terima-21-siswa-baru/",
+      "destination": "/stories/indonesia-bisa-membaca-terima-21-siswa-baru/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/16/indonesia-bisa-membaca-terima-21-siswa-baru",
+      "destination": "/stories/indonesia-bisa-membaca-terima-21-siswa-baru/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/08/indonesia-bisa-membaca-lepas-11-siswa/",
+      "destination": "/stories/indonesia-bisa-membaca-lepas-11-siswa/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/06/08/indonesia-bisa-membaca-lepas-11-siswa",
+      "destination": "/stories/indonesia-bisa-membaca-lepas-11-siswa/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/01/10/manda-menolak-menyerah-dari-tekanan-ekonomi/",
+      "destination": "/stories/manda-menolak-menyerah-dari-tekanan-ekonomi/",
+      "permanent": true
+    },
+    {
+      "source": "/2025/01/10/manda-menolak-menyerah-dari-tekanan-ekonomi",
+      "destination": "/stories/manda-menolak-menyerah-dari-tekanan-ekonomi/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/12/20/anggie-tanggalkan-rasa-malu-demi-cita-cita/",
+      "destination": "/stories/anggie-tanggalkan-rasa-malu-demi-cita-cita/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/12/20/anggie-tanggalkan-rasa-malu-demi-cita-cita",
+      "destination": "/stories/anggie-tanggalkan-rasa-malu-demi-cita-cita/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/11/05/sisi-baik-dan-liputan6-salurkan-bantuan-zurich-untuk-difabel/",
+      "destination": "/stories/sisi-baik-dan-liputan6-salurkan-bantuan-zurich-untuk-difabel/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/11/05/sisi-baik-dan-liputan6-salurkan-bantuan-zurich-untuk-difabel",
+      "destination": "/stories/sisi-baik-dan-liputan6-salurkan-bantuan-zurich-untuk-difabel/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/10/14/fik-ui-periksa-kesehatan-orang-tua-siswa-indonesia-bisa-membaca/",
+      "destination": "/stories/fik-ui-periksa-kesehatan-orang-tua-siswa-indonesia-bisa-membaca/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/10/14/fik-ui-periksa-kesehatan-orang-tua-siswa-indonesia-bisa-membaca",
+      "destination": "/stories/fik-ui-periksa-kesehatan-orang-tua-siswa-indonesia-bisa-membaca/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/09/04/patungan-spp-bantu-siswa-bantu-sekolah/",
+      "destination": "/stories/patungan-spp-bantu-siswa-bantu-sekolah/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/09/04/patungan-spp-bantu-siswa-bantu-sekolah",
+      "destination": "/stories/patungan-spp-bantu-siswa-bantu-sekolah/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/07/29/indonesia-bisa-membaca-dimulai/",
+      "destination": "/stories/indonesia-bisa-membaca-dimulai/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/07/29/indonesia-bisa-membaca-dimulai",
+      "destination": "/stories/indonesia-bisa-membaca-dimulai/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/07/08/jbl-resmi-jadi-mitra-kebaikan-sisi-baik-project/",
+      "destination": "/stories/jbl-resmi-jadi-mitra-kebaikan-sisi-baik-project/",
+      "permanent": true
+    },
+    {
+      "source": "/2024/07/08/jbl-resmi-jadi-mitra-kebaikan-sisi-baik-project",
+      "destination": "/stories/jbl-resmi-jadi-mitra-kebaikan-sisi-baik-project/",
+      "permanent": true
+    },
+    {
+      "source": "/home/lulus-ibm-2025-2026{/}?",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/home/foto-penerima-ijazah-ibm-2025-2026{/}?",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/home/foto-penerima-ijazah-dan-orang-tua{/}?",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/home/keseruan-pelepasan-ibm-2025-2026{/}?",
+      "destination": "/stories/lulus-ibm-2025-2026/",
+      "permanent": true
+    },
+    {
+      "source": "/home/program-utama/:path*",
+      "destination": "/program-utama/",
+      "permanent": true
+    },
+    {
+      "source": "/home/patungan-sisi-baik/:path*",
+      "destination": "/program-utama/",
+      "permanent": true
+    },
+    {
+      "source": "/special-kids-indonesia-bisa-membaca/:path*",
+      "destination": "/program-utama/",
+      "permanent": true
+    },
+    {
+      "source": "/home/do-donate{/}?",
+      "destination": "/do-donate/",
+      "permanent": true
+    },
+    {
+      "source": "/home/team{/}?",
+      "destination": "/tentang-kami/",
+      "permanent": true
+    },
+    {
+      "source": "/team-00{/}?",
+      "destination": "/tentang-kami/",
+      "permanent": true
+    },
+    {
+      "source": "/visi{/}?",
+      "destination": "/tentang-kami/",
+      "permanent": true
+    },
+    {
+      "source": "/home/sekilas-sisi-baik{/}?",
+      "destination": "/tentang-kami/",
+      "permanent": true
+    },
+    {
+      "source": "/home/impact-report-sisi-baik-2024-2025{/}?",
+      "destination": "/docs/impact-report-2024-2025.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/home-2{/}?",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home{/}?",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/activity{/}?",
+      "destination": "/stories/",
+      "permanent": true
+    },
+    {
+      "source": "/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*",
+      "destination": "/stories/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    }
+  ]
+}

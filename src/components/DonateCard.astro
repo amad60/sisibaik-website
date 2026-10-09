@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { brandImg } from '../lib/images';
+import { site } from '../data/site';
+
+const confirm = `${site.whatsapp}?text=${encodeURIComponent('Halo Sisi Baik, saya ingin mengonfirmasi donasi saya.')}`;
+const groups = site.bank.account.match(/.{1,4}/g)?.join(' ');
+---
+<div class="donate">
+  <div class="bank">
+    <div class="row">
+      <span class="label">Transfer ke rekening</span>
+      <Image src={brandImg('logo-ocbc')} alt={`Bank ${site.bank.name}`} height={26} width={Math.round(26 * (brandImg('logo-ocbc').width / brandImg('logo-ocbc').height))} class="ocbc" />
+    </div>
+    <p class="acct" aria-label={`Nomor rekening ${site.bank.account}`}>{groups}</p>
+    <p class="holder">a.n. {site.bank.holder}</p>
+    <div class="actions">
+      <button type="button" class="btn btn--sun btn--small" data-copy={site.bank.account}>
+        <Icon name="copy" class="arrow i-copy" /><Icon name="check" class="arrow i-check" />
+        <span data-copy-label>Salin nomor rekening</span>
+      </button>
+      <a class="btn btn--light btn--small" href={confirm} target="_blank" rel="noopener">
+        <Icon name="whatsapp" class="arrow" /> Konfirmasi donasi
+      </a>
+    </div>
+  </div>
+  <div class="qris">
+    <Image src={brandImg('qris-sisi-baik')} alt="Kode QRIS Sisi Baik untuk donasi" width={300} height={300} />
+    <p>Atau pindai QRIS dari aplikasi bank dan dompet digital.</p>
+  </div>
+</div>
+
+<style>
+  .donate {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.4rem;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    border-radius: var(--radius-lg);
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .donate::before {
+    content: '';
+    position: absolute;
+    width: 260px;
+    aspect-ratio: 1;
+    left: -90px;
+    bottom: -150px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(252 168 24 / 0.45), transparent);
+    pointer-events: none;
+  }
+  .bank {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .label {
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(247 240 227 / 0.7);
+  }
+  .ocbc {
+    height: 26px;
+    width: auto;
+    background: #fff;
+    border-radius: 6px;
+    padding: 3px 6px;
+    box-sizing: content-box;
+  }
+  .acct {
+    margin: 1.2rem 0 0.2rem;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-weight: 400;
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .holder {
+    margin: 0.6rem 0 1.6rem;
+    color: rgb(247 240 227 / 0.82);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+  }
+  .donate :global(.i-check) {
+    display: none;
+  }
+  .donate :global(.is-copied .i-check) {
+    display: block;
+  }
+  .donate :global(.is-copied .i-copy) {
+    display: none;
+  }
+  .qris {
+    position: relative;
+    width: 168px;
+    text-align: center;
+  }
+  .qris :global(img) {
+    width: 168px;
+    height: 168px;
+    border-radius: 16px;
+    background: #fff;
+    padding: 6px;
+  }
+  .qris p {
+    margin: 0.7rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: rgb(247 240 227 / 0.72);
+  }
+  @media (max-width: 600px) {
+    .donate {
+      grid-template-columns: 1fr;
+    }
+    .qris {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: auto;
+      text-align: left;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgb(247 240 227 / 0.16);
+    }
+    .qris :global(img) {
+      width: 112px;
+      height: 112px;
+      flex: none;
+    }
+    .qris p {
+      margin: 0;
+    }
+  }
+</style>

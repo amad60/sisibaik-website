@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/home/Hero.astro';
+import Filmstrip from '../components/home/Filmstrip.astro';
+import Legacy from '../components/home/Legacy.astro';
+import Programs from '../components/home/Programs.astro';
+import Impact from '../components/home/Impact.astro';
+import Stories from '../components/home/Stories.astro';
+import Help from '../components/home/Help.astro';
+import Partners from '../components/home/Partners.astro';
+import Contact from '../components/home/Contact.astro';
+import { FOUNDED_YEAR } from '../data/site';
+---
+<Base description={`Sisi Baik Project melanjutkan warisan Edukasi Dasar yang dirintis Ibu Tien Suryantini sejak ${FOUNDED_YEAR}: kelas calistung bebas biaya Indonesia Bisa Membaca dan bantuan tunggakan sekolah Patungan SPP di Depok.`}>
+  <Hero />
+  <Filmstrip />
+  <Legacy />
+  <Programs />
+  <Impact />
+  <Stories />
+  <Help />
+  <Partners />
+  <Contact />
+</Base>

@@ -1,0 +1,249 @@
+---
+import Photo from '../Photo.astro';
+import Icon from '../Icon.astro';
+import DonateCard from '../DonateCard.astro';
+import Allocation from '../Allocation.astro';
+import { site, impact } from '../../data/site';
+
+const volunteer = `${site.whatsapp}?text=${encodeURIComponent('Halo Sisi Baik, saya ingin menjadi relawan pengajar Indonesia Bisa Membaca.')}`;
+
+const ways = [
+  {
+    no: '01',
+    title: 'Donasi untuk program',
+    body: `Biaya operasional kelas Indonesia Bisa Membaca, Patungan SPP, dan Patungan Opor. Kebutuhan kelas IBM saat ini ${impact.ibmYearlyCost} per tahun.`,
+    cta: 'Cara berdonasi',
+    href: '/do-donate/',
+  },
+  {
+    no: '02',
+    title: 'Jadi relawan pengajar',
+    body: 'Luangkan waktu untuk mengajar baca, tulis, dan hitung di kelas Indonesia Bisa Membaca, Ratu Jaya, Depok.',
+    cta: 'Daftar lewat WhatsApp',
+    href: volunteer,
+    external: true,
+  },
+  {
+    no: '03',
+    title: 'Belanja di Toko Sisi Baik',
+    body: 'Setiap pembelian di toko resmi kami ikut menopang keberlanjutan gerakan.',
+    cta: 'Kunjungi Tokopedia',
+    href: site.store,
+    external: true,
+  },
+  {
+    no: '04',
+    title: 'Kemitraan perusahaan',
+    body: 'Bergabung sebagai Mitra Kebaikan untuk mendukung program pendidikan secara berkelanjutan.',
+    cta: 'Lihat Mitra Kebaikan',
+    href: '#mitra',
+  },
+];
+---
+<section class="section help" id="ikut-bergerak" aria-labelledby="help-title">
+  <div class="wrap">
+    <div class="intro">
+      <div class="lead">
+        <p class="eyebrow" data-reveal><span class="num">05</span> Ikut Bergerak</p>
+        <h2 id="help-title" class="h1" data-reveal style="--d:.08s">
+          Kami berharap suatu hari kami bisa <span class="ital accent">berhenti.</span>
+        </h2>
+        <p class="big" data-reveal style="--d:.14s">
+          Bukan karena lelah berbuat baik, tetapi karena pada hari itu tidak ada lagi anak atau masyarakat yang tidak memiliki akses pada pendidikan dasar. Selama hari itu belum tiba, kami akan terus berjalan, bersama Warga Baik.
+        </p>
+      </div>
+      <figure class="print tape pic" data-reveal style="--d:.2s" data-parallax="0.05">
+        <Photo name="budi-pekerti" alt="Siswa Indonesia Bisa Membaca belajar bersama di kelas" sizes="(min-width: 1000px) 28vw, 70vw" widths={[420, 720, 1000]} />
+        <figcaption>Ruang belajar yang dijaga bersama</figcaption>
+      </figure>
+    </div>
+
+    <ol class="ways">
+      {ways.map((w, i) => (
+        <li data-reveal style={`--d:${i * 0.07}s`}>
+          <a href={w.href} {...(w.external ? { target: '_blank', rel: 'noopener' } : {})}>
+            <span class="no">{w.no}</span>
+            <h3>{w.title}</h3>
+            <p>{w.body}</p>
+            <span class="cta">{w.cta} <Icon name="arrow-up-right" /></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <div class="give">
+      <div data-reveal>
+        <DonateCard />
+      </div>
+      <div class="side" data-reveal style="--d:.1s">
+        <Allocation />
+        <p class="note">Laporan penggunaan dana kami terbitkan secara terbuka. <a href={site.docs.impactReport} target="_blank" rel="noopener">Baca Impact Report 2024-2025</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+  }
+  .lead .h1 {
+    max-width: 14ch;
+  }
+  .big {
+    margin: 1.8rem 0 0;
+    max-width: 52ch;
+    font-family: var(--serif);
+    font-variation-settings: 'SOFT' 100;
+    font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.55rem);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .pic {
+    margin: 0;
+    aspect-ratio: 0.9;
+    rotate: 3deg;
+    max-width: 360px;
+    justify-self: end;
+    width: 100%;
+  }
+  .pic :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .ways {
+    list-style: none;
+    margin: clamp(3.5rem, 7vw, 5.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1.5px solid var(--ink);
+  }
+  .ways li + li {
+    border-left: 1px solid var(--line);
+  }
+  .ways a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    height: 100%;
+    padding: 1.6rem 1.5rem 1.8rem;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    isolation: isolate;
+  }
+  .ways a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--sun-soft);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .ways a:hover::before,
+  .ways a:focus-visible::before {
+    transform: none;
+  }
+  .no {
+    font-family: var(--serif);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 1.1rem;
+    color: var(--blue);
+  }
+  .ways h3 {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 450;
+    font-variation-settings: 'SOFT' 100;
+    font-size: 1.55rem;
+    line-height: 1.1;
+  }
+  .ways p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    flex: 1;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding-top: 0.6rem;
+  }
+  .cta :global(svg) {
+    width: 0.95rem;
+    height: 0.95rem;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .ways a:hover .cta :global(svg) {
+    transform: translate(3px, -3px);
+  }
+
+  .give {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.2rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    align-items: stretch;
+  }
+  .give > div:first-child,
+  .give > div:first-child > :global(.donate) {
+    height: 100%;
+  }
+  .note {
+    margin: 1rem 0.4rem 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .note a {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 1100px) {
+    .ways {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ways li:nth-child(3) {
+      border-left: 0;
+    }
+    .ways li:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+    .give {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 800px) {
+    .intro {
+      grid-template-columns: 1fr;
+    }
+    .pic {
+      justify-self: start;
+      max-width: 260px;
+      margin-left: 0.5rem;
+    }
+  }
+  @media (max-width: 560px) {
+    .ways {
+      grid-template-columns: 1fr;
+    }
+    .ways li + li {
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+    .ways a {
+      padding: 1.4rem 0.2rem 1.5rem;
+    }
+  }
+</style>
